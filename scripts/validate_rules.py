@@ -13,7 +13,10 @@ def main(path):
     sdks = d.get("sdks", [])
     if not sdks: errs.append("sdks empty")
     seen = {}
+    name_count = {}
     for i, r in enumerate(sdks):
+        nm = r.get("name", "")
+        if nm: name_count[nm] = name_count.get(nm, 0) + 1
         rid = r.get("id")
         if not rid: errs.append(f"[{i}] missing id"); continue
         if rid in seen: errs.append(f"[{i}] duplicate id {rid} (first at [{seen[rid]}])")
@@ -26,6 +29,10 @@ def main(path):
         for c in r.get("components", []):
             if c.get("type") not in TYPES: errs.append(f"[{rid}] bad component type {c.get('type')}")
             if not c.get("class"): errs.append(f"[{rid}] component missing class")
+    # 同名重复规则提示（如 "Pangle SDK" 双 id 会导致富化/图标映射错位）
+    dups = [n for n, c in name_count.items() if c > 1]
+    for n in dups:
+        errs.append(f"duplicate rule name (will misalign icons/descriptions): {n}")
     if errs:
         print("INVALID:")
         for e in errs[:50]: print(" -", e)
