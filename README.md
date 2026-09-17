@@ -15,8 +15,8 @@ SDK-Pruner 的组件识别与安全禁用规则库（独立仓库，Apache-2.0�
 
 - **端侧消费**：SDK-Pruner app 支持「内置快照 + 订阅源」双层加载。
 - **订阅地址**：
-  - 固定版本：`https://raw.githubusercontent.com/deserthouse/sdk-pruner-rules/v1/rules/snapshot.json`
-  - 跟随最新 main：`https://raw.githubusercontent.com/deserthouse/sdk-pruner-rules/main/rules/snapshot.json`
+  - 固定版本：`https://raw.githubusercontent.com/deserthouse/prunoid-rules/v1/rules/snapshot.json`
+  - 跟随最新 main：`https://raw.githubusercontent.com/deserthouse/prunoid-rules/main/rules/snapshot.json`
 - **合并语义**：订阅条目按 `id` 覆盖内置快照，新 `id` 追加。
 - **版本策略**：每次快照更新打 `vN` tag，固定 URL 永不变更内容。
 
