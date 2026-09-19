@@ -29,10 +29,27 @@ def main(path):
         for c in r.get("components", []):
             if c.get("type") not in TYPES: errs.append(f"[{rid}] bad component type {c.get('type')}")
             if not c.get("class"): errs.append(f"[{rid}] component missing class")
-    # 同名重复规则提示（如 "Pangle SDK" 双 id 会导致富化/图标映射错位）
-    dups = [n for n, c in name_count.items() if c > 1]
-    for n in dups:
-        errs.append(f"duplicate rule name (will misalign icons/descriptions): {n}")
+    # 同名重复：警告级（v2 原则 §1.2——多源对同一 SDK 各持一条是合法形态，合并靠 build_snapshot）
+    warns = []
+    for n, c in name_count.items():
+        if c > 1:
+            warns.append(f"duplicate rule name x{c} (legal multi-source form): {n}")
+    # §4.3 前缀一致性：不同规则的前缀前两段相同 -> 潜在误归类/应拆分（警告级）
+    two_seg_owner = {}
+    for r in sdks:
+        for pfx in r.get("packPrefixes", []):
+            two = ".".join(pfx.strip(".").split(".")[:2])
+            if two.count(".") < 1 or len(two) < 3:
+                continue
+            prev = two_seg_owner.get(two)
+            if prev and prev[1] != r.get("name"):
+                warns.append(f"prefix family collision on '{two}.*': {prev[0]} vs {r.get('name')}")
+            elif not prev:
+                two_seg_owner[two] = (r["id"], r.get("name"))
+    for w in warns[:30]:
+        print("WARN:", w)
+    if warns:
+        print(f"({len(warns)} warnings total)")
     if errs:
         print("INVALID:")
         for e in errs[:50]: print(" -", e)
