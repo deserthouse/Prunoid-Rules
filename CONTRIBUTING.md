@@ -45,3 +45,15 @@ PR 会自动运行 `scripts/validate_rules.py`：
 - 组件 type 枚举合法
 
 本地校验：`python scripts/validate_rules.py rules/snapshot.json`
+
+## 最简单的方式：提交组件清单（无需写代码，2026-09-21 起）
+
+1. 安装 [Prunoid](https://github.com/deserthouse/Prunoid) 扫描设备
+2. 任一应用详情 → 「未识别组件」→ 展开 → 底部「分享组件清单」
+3. 用 **Component report** issue 模板粘贴导出的 JSON
+4. 维护者研判后收录（下个快照生效）；清单仅含包名与类名（客观事实），无个人信息
+
+## 数据治理原则（2026-09-19 起，v2）
+
+收录四步：事实提取（manifest 组件）→ 研判（附公开依据）→ schema 化（source 标注+confidence）→ CI 门禁。
+安全等级只升不造；研判不确定项宁缺毋滥。详见主仓 research/《数据管理原则 v2》。
