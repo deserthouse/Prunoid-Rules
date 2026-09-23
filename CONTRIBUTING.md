@@ -56,4 +56,4 @@ PR 会自动运行 `scripts/validate_rules.py`：
 ## 数据治理原则（2026-09-19 起，v2）
 
 收录四步：事实提取（manifest 组件）→ 研判（附公开依据）→ schema 化（source 标注+confidence）→ CI 门禁。
-安全等级只升不造；研判不确定项宁缺毋滥。详见主仓 research/《数据管理原则 v2》。
+安全等级只升不造；研判不确定项宁缺毋滥。

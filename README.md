@@ -49,7 +49,7 @@ Prunoid App 支持「内置快照 + 多源订阅」：可同时订阅多个规�
 | Fuck.AD dex 提取 | 客观事实 | 聚合广告 SDK 根包名（16 家） |
 | 实机 APK 分析 | 一手数据 | 置信度最高 |
 
-明确不使用：DuckDuckGo tracker-blocklists（CC BY-NC-SA 禁商用）、AppManager 数据文件（GPL）、Exodus 数据库直接合并（ODbL 同源义务）。逐源一手判定见主项目 `research/` 存档。
+明确不使用：DuckDuckGo tracker-blocklists（CC BY-NC-SA 禁商用）、AppManager 数据文件（GPL）、Exodus 数据库直接合并（ODbL 同源义务）。逐源许可判定原则见 [CONTRIBUTING](CONTRIBUTING.md)。
 
 ## 🤝 贡献
 
