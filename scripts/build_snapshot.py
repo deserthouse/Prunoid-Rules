@@ -3,7 +3,7 @@
 [存档副本] 本脚本的运行依赖主项目的 research/ 提取物目录，独立仓库内不可直接执行。
 端侧快照由主项目生成后发布到 rules/snapshot.json；本副本用于审计生成逻辑。
 
-SDK-Pruner 冷启动快照构建脚本（M1-R2）
+Prunoid 冷启动快照构建脚本（M1-R2）
 正源与协议（见 2026-09-17_数据源合规与建库原则.md）：
   1. blocker-general-rules (Apache-2.0)   —— SDK 禁用规则 468 条（含 safeToBlock/sideEffect/contributors），正源
   2. LibChecker-Rules v44  (Apache-2.0)   —— 组件级识别锚点（四类组件 + native so），骨架
@@ -162,7 +162,7 @@ if os.path.exists(OF2PKS):
 out = {
     "schemaVersion": 1,
     "generatedAt": datetime.now().isoformat(timespec="seconds"),
-    "generator": "research/build_snapshot.py",
+    "generator": "scripts/build_snapshot.py",
     "license": "Apache-2.0 (sources: blocker-general-rules, LibChecker-Rules; facts: Fuck.AD dex, oF2pks index)",
     "stats": {"sdks": len(sdks), "blocker": n_blocker, "fuckad": n_fuckad,
               "lcrComponents": comp_count, "lcrSo": so_count, "of2pks": n_of2pks},
