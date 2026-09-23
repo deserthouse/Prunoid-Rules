@@ -53,6 +53,12 @@ CAT_RULES = [
     (re.compile(r"androidx|Jetpack|Kotlin|Coroutines|Google Play|Play Services|Guava|gRPC|Protobuf|Firebase(?! Analytics)|WorkManager|Room|Compose|Lifecycle|Startup|Profile", re.I), "framework"),
 ]
 
+# 批R5 数据侧：跨语言别名 → 规范名（与规则库 name 全等匹配）
+ALIAS_MERGES = {
+    "Aurora Push": "极光推送",
+    "Getui SDK": "个推",
+}
+
 def categorize(name):
     for pat, cat in CAT_RULES:
         if pat.search(name):
@@ -161,6 +167,7 @@ if os.path.exists(OF2PKS):
 # ── 输出 ──────────────────────────────────────────────────────────
 out = {
     "schemaVersion": 1,
+    "aliases": ALIAS_MERGES,
     "generatedAt": datetime.now().isoformat(timespec="seconds"),
     "generator": "scripts/build_snapshot.py",
     "license": "Apache-2.0 (sources: blocker-general-rules, LibChecker-Rules; facts: Fuck.AD dex, oF2pks index)",
