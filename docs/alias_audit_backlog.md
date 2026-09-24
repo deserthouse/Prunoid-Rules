@@ -1,0 +1,100 @@
+# 别名长尾审计清单（批N4，2026-09-25）
+
+> 同一公司下多个规则实体。规则：**自动合并仅限确认同源异名**（跨家分发度≥3 或官方同名变体）；
+> 本清单由脚本生成，人工核对后进 `scripts/build_snapshot.py` 的 ALIAS_MERGES。
+
+- Agora: Agora RTC SDK, Agora RTC2
+- Alibaba: Ali Account SDK, Ali Mobile Data Analysis, Ali Mobile push, Ali TBAuth, AliNNPython, Alibaba Baichuan Advertising, Alibaba ExtHub, Aliyun DTF Face Verify, Aliyun RealIdentity, Aliyun Short Video Editor, AndFix, DexPatch, FlutterBoost, GCanvas, GaiaX, Kraken, MNN, TanX, Taobao Interaction Channel, Weex, XQUIC, mPaaS, mPaaS 扫一扫, mPaaS 社交分享, 一键登录和本机号码校验, 号码认证服务, 实人认证 SDK, 岳鹰全景监控, 百川电商 SDK - 唤醒手淘, 百川电商 SDK - 授权, 金融级实人认证 SDK, 阿里云短视频 SDK, 阿里云语音服务 SDK（NLSClinet）, 阿里聚安全, 高德地图 SDK
+- Alipay: Nebula SDK, PCDN SDK, 支付宝 SDK
+- Aliyun: Mtop SDK, 日志服务 SLS, 阿里云云解析 DNS, 阿里云游戏盾, 阿里移动推送, 阿里移动热修复
+- Android: C++ 共享库, File Provider, FrameSequence, RenderScript, RenderScript Intrinsics Replacement Toolkit, multidex
+- Ant Group: Alipay Face ZIM, Alipay MSP Checkout, Alipay Mobile SDK, Alipay Push SDK, Ant mPaaS Container
+- Apache: Apache Cordova, TVM
+- AppLovin: AppLovin, AppLovin MAX
+- Baidu: BARDUmix, Baidu Face Recognition, Baidu Maps, Baidu 百青藤, DuMix, Paddle Lite, Sofire, 智能小程序, 百度 LBS, 百度云推送, 百度人脸识别, 百度地图 SDK, 百度应用加固, 离线语音合成 SDK, 移动应用推广 SDK, 语音识别 SDK
+- Baidu.com, Inc: Baidu Advertising, Baidu Cloud Push, Baidu Mobile App Promotion
+- Bilibili: Bilibili Oauth SDK, BurstLinker, IJKPlayer, Xpref, 烈焰弹幕使
+- ByteDance: BHook, BoostMultiDex, ByteDance Sonic, BytePlus RTC, CV SDK, CodeLocator, Douyin Live Lite, Douyin MiniApp Host, Douyin Pay, Lynx, Mira, Pangle SDK, Pangle 穿山甲, ShadowHook, Volcengine OneKit
+- Bytedance: Tomato Free Novel Advertising Component, 火山引擎云手机 SDK
+- CRIWARE: CRI ADX2 Unity 插件, CRI Sofdec2 Unity 插件
+- Chromium: Cronet, Embedded Chromium WebView, crashpad, libchrome, libmonochrome
+- DCloud: DCloud uni-app Container, H5P.Android, uni-app
+- Didi: DRouter, VirtualAPK, VirtualAPK Framework, 滴滴 SDK
+- Expo: Expo AV, Expo Framework, Expo SQLite
+- Facebook: AccountKit, Audience Network, Audience Network SDK, Conceal, Facebook Analytics, Facebook Audience, Facebook Flipper, Facebook Login, Facebook Notifications, Facebook Places, Facebook SDK, Facebook Share, Flipper, Folly, Fresco, Hermes JS Engine, React Native, Yoga, Zstandard
+- Fcitx / Fcitx 5 for Android: Fcitx 5, Fcitx 5 Lua, Fcitx 5 for Android, Fcitx 5 中文插件, libIME
+- Firelight: FMOD, FMOD Studio
+- Flutter: Flutter Firebase Plugins, Flutter ImagePicker
+- Google: ARCore, Android 游戏开发工具包帧率调整, BarHopper, BoringSSL, Breakpad, Brotli, Cardboard SDK, Chromium Webview, Conscrypt, Crashlytics, EasyPermissions, ExoPlayer, Filament, Firebase, Firebase Analytics, Firebase Cloud Messaging, Firebase Performance, Flutter, Golang, Google AdMob, Google Analytics, Google Cast, Google Crashlytics, Google Firebase Analytics, Google Ink (Sketchology), Google Map SDK, Google Play Billing, Google Play Core, Google Play Games plugin for Unity, Google Play Legacy Photo Picker, Google Play Services, Google Sign-In, Google Tag Manager, Google VR SDK, Google WOFF2, Google’s Drive API v3, Jetpack Activity, Jetpack App Startup, Jetpack AppCompat, Jetpack AppFunctions, Jetpack Browser, Jetpack Camera, Jetpack Camera2, Jetpack Car, Jetpack Compose, Jetpack Core, Jetpack Credentials, Jetpack DataStore, Jetpack Glance, Jetpack Graphics, Jetpack Lifecycle, Jetpack Media, Jetpack Media Session, Jetpack Media3, Jetpack MediaRouter, Jetpack PDF, Jetpack ProfileInstaller, Jetpack Remote Callback, Jetpack Room, Jetpack SQLite, Jetpack ShareTarget, Jetpack Slice, Jetpack Test, Jetpack Tracing, Jetpack WebKit, Jetpack WorkManager, Jetpack XR, LiquidFun, ML Kit, MediaPipe LLM Inference, MediaPipe Tasks, OSS Licenses Gradle Plugin, Oboe, PairIP, Pdfium, Play Asset Delivery, WebM VP8/VP9, ZWrapper, Zucchini, angle, bsdiff, bspatch, glog, ion, libYUV, libhfyuv, libnativehelper_compat_libc++, libultrahdr, open-vcdiff, protobuf, zipalign
+- HONOR: 荣耀广告 SDK, 荣耀推送服务
+- HUAWEI: ArkUI-X, Ascend CANN, HMS Video Kit HDR Vivid, PerfGenius
+- Heytap: Oppo Advertising Alliance, Oppo Push Service
+- Huawei: AR Engine, AppGallery Connect, AppGallery Connect APM, HMS Analytics Kit, HMS Audio Kit, HMS Business Touch Kit, HMS Core, HMS Core AAID, HMS Health Kit, HMS ML Kit, HMS Scan Kit, HMS Update, HMS Video Kit, HUAWEI Ads Kit, HUAWEI CaaS Engine, Huawei Ads SDK, Huawei DTM, Huawei Push, 华为账号服务
+- Invertase: Notifee, React Native Firebase
+- JD: JD Pay SDK, 开普勒 SDK
+- Kuaishou: Kuaishou Advertising Alliance, Kwai 快手联盟
+- LSPosed: LSPatch, LSPlant
+- Liftoff: Liftoff Monetize, Vungle
+- LingoChamp: FileDownloader, OkDownload
+- Mapbox: Mapbox GL Native, Mapbox Maps SDK
+- Meizu Telecom Equipment Co., Ltd.: Meizu Ads, Meizu message push service
+- Microsoft: 1DS, ADAL, App Center, Cognitive Services Speech SDK, Intune App SDK, MSAL, Open XML SDK, Xamarin, onnxruntime, react-native-host
+- Mozilla: GeckoView, Lib_XUL, Megazord, Mozilla NSS, Rust
+- NetEase: NetEase Qiyukf, NetEase Yidun QuickLogin
+- Netease: tracepath, 七鱼 SDK, 网易云信, 网易云通信 SDK, 网易易盾, 网易易盾智能反外挂
+- OPPO: OPPO Push, OPPO 安全检测 SDK, OPPO 广告 SDK, 欢太账号 OAuth 授权 SDK, 欢太账号授权 SDK
+- Qualcomm: FastCV, QESDK
+- Qualcomm Snapdragon: SNPE SDK, Symphony CPU 运行时库
+- Software Mansion: React Native Screens, React Native Worklets
+- Square: LeakCanary, Picasso
+- Stripe: Stripe Payments, Stripe SDK
+- TDS 腾讯端服务: Bugly, Hippy
+- TapTap: TapSDK, TapTap 开发者服务
+- Tencent:  人脸核身 SDK, Bugly, CrashSight, Donut, GDT 优量汇, GME, HardCoder, Kona 国密套件, MMKV, Mars, Matrix, PAG, PixUI, PuerTS, Qimei SDK, TDS 腾讯端服务跨平台框架, TNN, TQUIC, Tencent Cloud TRTC/LiteAV, Tencent Face Verification (Huiyan), Tencent QCloud LogUtils, Tencent RMonitor APM, Tencent SHLogin, Tinker, WCDB, XNet, ffavc, ncnn, xLua, 信鸽推送, 国密套件, 手游安全 SDK, 正版曲库直通车, 游戏语音 GVoice, 王卡 SDK, 米大师, 腾讯云 HTTPDNS, 腾讯云实时音视频, 腾讯云实时音视频 SDK, 腾讯云手游安全, 腾讯云直播 SDK, 腾讯云短视频 SDK, 腾讯云语音识别, 腾讯云通信 SDK, 腾讯优图 SDK, 腾讯地图 SDK, 腾讯客户端性能分析, 腾讯广告 SDK, 腾讯开放平台, 腾讯流量联盟, 腾讯浏览服务（TBS）, 腾讯游戏 GCloud, 腾讯游戏 MSDK, 腾讯灯塔 SDK, 腾讯特效 SDK, 腾讯移动分析, 腾讯移动推送, 防水墙
+- Tencent Holdings Limited: Tencent Advertising, Tencent Browser Service (X5 Kernel), Tencent Bugly, Tencent Mobile Analytics, Tencent Mobile Push, Tencent Tinker hot update
+- Tencent Inc.: WeChat NFC, WeChat advertisement
+- UC: U4 内核, UC 内核
+- Umeng: U-Game 金融风控组件, U-Share 社会化分享, 友盟推送, 移动统计分析
+- Unity: Burst, IronSource, Unity Ads, Unity Mobile Notifications, Unity Mono, Unity Services Ads, Unity WebGL Host
+- Unity Technologies: NativeAudio, Unity, Unity Ads
+- VideoLAN: LibVLC, x264
+- Volcengine: DataFinder, GMP Push SDK
+- Xiaomi: MACE, MiPush, 小爱 SDK, 小米 IoT SDK, 小米广告 SDK, 小米应用检查更新 SDK, 小米游戏 SDK, 小米账号开放平台
+- Xiaomi Inc.: Xiaomi Application Check Update SDK, Xiaomi Mobile Ads Alliance (Mimo Ad SDK), Xiaomi Push
+- Xiph.Org: Opus, Vorbis
+- acoustic: IBM Mobile Marketing (Acoustic), Tealeaf
+- adjust: Adjust, Adjust Unbotify
+- adobe: Auditude, Demdex, Omniture
+- amazon: Amazon Analytics (Amazon insights), Amazon Mobile Analytics (Amplify), Amazon Mobile Associates
+- appbrain: AppBrain, YuMe
+- appcenter: Microsoft Visual Studio App Center Analytics, Microsoft Visual Studio App Center Crashes
+- aria2: aria2, libaria2
+- asLody: Sandhook, VirtualApp
+- baidu: Baidu APPX, Baidu Location, Baidu Map, Baidu Mobile Stat, Baidu Navigation
+- co: Admixer, Geniee, maio by i-mobile
+- com: Flowsense, In Loco, OzTAM
+- crunchbase: AdMarvel, GPShopper, Inneractive, Revmob
+- github: AdMuing, Alohalytics, Bolts, RjFun, VKontakte SDK
+- hzy3774: AndroidP7zip, Un7zip
+- iFlyTek: AIUI, 离线语音合成
+- iQIYI: Neptune, Qigsaw, xCrash, xHook
+- maoabc: aterminal, nmmp, unrar-android
+- millennialmedia: JumpTap, Millennial Media
+- mrousavy: React Native MMKV, React Native Vision Camera, react-native-mmkv
+- my: myTarget, myTracker
+- qq: Tencent MTA, Tencent Map LBS, Tencent Stats
+- salesforce: Audience Studio (Krux), Salesforce Marketing Cloud
+- singular: Apsalar, Singular
+- sisong: HDiffPatch, hsynz
+- snapchat: Snap Ad Kit, Snapchat Login Kit
+- software-mansion: React Native Gesture Handler, React Native Reanimated, react-native-picker, react-native-svg
+- umeng: Umeng Analytics, Umeng Feedback
+- vivo: VCAP, vivo Push, vivo 网游联运 SDK
+- xiph: Free Lossless Audio Codec, ogg
+- yandex: AppMetrica, Yandex Ad
+- 京东: Taro, 京媒 SDK
+- 快手: 快手广告 SDK, 快手开放平台
+- 旷视: 人像美化 SDK, 旷视 SDK
+- 极光: 极光推送, 极光认证 SDK
+- 科大讯飞: 星火认知大模型, 讯飞 SDK
+- 腾讯灯塔: 腾讯灯塔 DataTalk, 腾讯灯塔终端 ID 精准识别体系
