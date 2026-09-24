@@ -57,6 +57,7 @@ CAT_RULES = [
 ALIAS_MERGES = {
     "Aurora Push": "极光推送",
     "Getui SDK": "个推",
+    "JiGuang Aurora Mobile JPush": "极光推送",
 }
 
 def categorize(name):
