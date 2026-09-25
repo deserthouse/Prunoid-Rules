@@ -1,0 +1,794 @@
+# 别名合并候选预分析（批G3，2026-09-25）
+
+> 由 alias_audit_backlog.md（95 家同公司多名实体）脚本预提取，收窄人工审计范围。
+> A 层=剥公共词后一端仅剩短修饰（拉丁≤4/CJK≤3，同源异名强候选）；B 层=高词元重叠（观察，疑独立产品）。
+> **同公司 ≠ 同源异名**：合并必须逐对核实组件锚点/官方关系后才进 `scripts/build_snapshot.py` 的 `ALIAS_MERGES`；本清单只缩小人工范围，不作合并决策。
+
+## A 层：强候选（20 对）
+
+- Agora: `Agora RTC SDK` ↔ `Agora RTC2`
+- Alibaba: `mPaaS` ↔ `mPaaS 扫一扫`
+- AppLovin: `AppLovin` ↔ `AppLovin MAX`
+- ByteDance: `Pangle SDK` ↔ `Pangle 穿山甲`
+- Expo: `Expo AV` ↔ `Expo Framework`
+- Fcitx / Fcitx 5 for Android: `Fcitx 5` ↔ `Fcitx 5 Lua`
+- Google: `Google Play Core` ↔ `Google Play Services`
+- Google: `Jetpack Camera` ↔ `Jetpack Camera2`
+- Google: `Jetpack Media` ↔ `Jetpack Media3`
+- Huawei: `AppGallery Connect` ↔ `AppGallery Connect APM`
+- Huawei: `HMS Core` ↔ `HMS Core AAID`
+- Huawei: `HUAWEI Ads Kit` ↔ `HUAWEI CaaS Engine`
+- Huawei: `HUAWEI Ads Kit` ↔ `Huawei DTM`
+- Huawei: `HUAWEI CaaS Engine` ↔ `Huawei Ads SDK`
+- Huawei: `HUAWEI CaaS Engine` ↔ `Huawei Push`
+- Huawei: `Huawei Ads SDK` ↔ `Huawei DTM`
+- Huawei: `Huawei DTM` ↔ `Huawei Push`
+- OPPO: `OPPO Push` ↔ `OPPO 广告 SDK`
+- Unity: `Unity Ads` ↔ `Unity Mono`
+- Unity: `Unity Mono` ↔ `Unity Services Ads`
+
+## B 层：观察项（763 对）
+
+- Alibaba: `Ali Account SDK` ↔ `Ali Mobile Data Analysis`
+- Alibaba: `Ali Account SDK` ↔ `Ali Mobile push`
+- Alibaba: `Ali Account SDK` ↔ `Ali TBAuth`
+- Alibaba: `Ali Mobile Data Analysis` ↔ `Ali Mobile push`
+- Alibaba: `Ali Mobile Data Analysis` ↔ `Ali TBAuth`
+- Alibaba: `Ali Mobile push` ↔ `Ali TBAuth`
+- Alibaba: `Alibaba Baichuan Advertising` ↔ `Alibaba ExtHub`
+- Alibaba: `Aliyun DTF Face Verify` ↔ `Aliyun RealIdentity`
+- Alibaba: `Aliyun RealIdentity` ↔ `Aliyun Short Video Editor`
+- Alibaba: `mPaaS` ↔ `mPaaS 社交分享`
+- Alibaba: `mPaaS 扫一扫` ↔ `mPaaS 社交分享`
+- Alibaba: `百川电商 SDK - 唤醒手淘` ↔ `百川电商 SDK - 授权`
+- Android: `RenderScript` ↔ `RenderScript Intrinsics Replacement Toolkit`
+- Ant Group: `Alipay Face ZIM` ↔ `Alipay Mobile SDK`
+- Ant Group: `Alipay Face ZIM` ↔ `Alipay Push SDK`
+- Ant Group: `Alipay MSP Checkout` ↔ `Alipay Mobile SDK`
+- Ant Group: `Alipay MSP Checkout` ↔ `Alipay Push SDK`
+- Ant Group: `Alipay Mobile SDK` ↔ `Alipay Push SDK`
+- Baidu: `Baidu Face Recognition` ↔ `Baidu Maps`
+- Baidu: `Baidu Face Recognition` ↔ `Baidu 百青藤`
+- Baidu: `Baidu Maps` ↔ `Baidu 百青藤`
+- Baidu.com, Inc: `Baidu Advertising` ↔ `Baidu Cloud Push`
+- Baidu.com, Inc: `Baidu Advertising` ↔ `Baidu Mobile App Promotion`
+- Baidu.com, Inc: `Baidu Cloud Push` ↔ `Baidu Mobile App Promotion`
+- ByteDance: `Douyin Live Lite` ↔ `Douyin Pay`
+- ByteDance: `Douyin MiniApp Host` ↔ `Douyin Pay`
+- CRIWARE: `CRI ADX2 Unity 插件` ↔ `CRI Sofdec2 Unity 插件`
+- DCloud: `DCloud uni-app Container` ↔ `uni-app`
+- Didi: `VirtualAPK` ↔ `VirtualAPK Framework`
+- Expo: `Expo AV` ↔ `Expo SQLite`
+- Expo: `Expo Framework` ↔ `Expo SQLite`
+- Facebook: `Audience Network` ↔ `Audience Network SDK`
+- Facebook: `Audience Network` ↔ `Facebook Audience`
+- Facebook: `Audience Network SDK` ↔ `Facebook Audience`
+- Facebook: `Facebook Analytics` ↔ `Facebook Audience`
+- Facebook: `Facebook Analytics` ↔ `Facebook Flipper`
+- Facebook: `Facebook Analytics` ↔ `Facebook Login`
+- Facebook: `Facebook Analytics` ↔ `Facebook Notifications`
+- Facebook: `Facebook Analytics` ↔ `Facebook Places`
+- Facebook: `Facebook Analytics` ↔ `Facebook SDK`
+- Facebook: `Facebook Analytics` ↔ `Facebook Share`
+- Facebook: `Facebook Audience` ↔ `Facebook Flipper`
+- Facebook: `Facebook Audience` ↔ `Facebook Login`
+- Facebook: `Facebook Audience` ↔ `Facebook Notifications`
+- Facebook: `Facebook Audience` ↔ `Facebook Places`
+- Facebook: `Facebook Audience` ↔ `Facebook SDK`
+- Facebook: `Facebook Audience` ↔ `Facebook Share`
+- Facebook: `Facebook Flipper` ↔ `Facebook Login`
+- Facebook: `Facebook Flipper` ↔ `Facebook Notifications`
+- Facebook: `Facebook Flipper` ↔ `Facebook Places`
+- Facebook: `Facebook Flipper` ↔ `Facebook SDK`
+- Facebook: `Facebook Flipper` ↔ `Facebook Share`
+- Facebook: `Facebook Flipper` ↔ `Flipper`
+- Facebook: `Facebook Login` ↔ `Facebook Notifications`
+- Facebook: `Facebook Login` ↔ `Facebook Places`
+- Facebook: `Facebook Login` ↔ `Facebook SDK`
+- Facebook: `Facebook Login` ↔ `Facebook Share`
+- Facebook: `Facebook Notifications` ↔ `Facebook Places`
+- Facebook: `Facebook Notifications` ↔ `Facebook SDK`
+- Facebook: `Facebook Notifications` ↔ `Facebook Share`
+- Facebook: `Facebook Places` ↔ `Facebook SDK`
+- Facebook: `Facebook Places` ↔ `Facebook Share`
+- Facebook: `Facebook SDK` ↔ `Facebook Share`
+- Fcitx / Fcitx 5 for Android: `Fcitx 5` ↔ `Fcitx 5 for Android`
+- Fcitx / Fcitx 5 for Android: `Fcitx 5` ↔ `Fcitx 5 中文插件`
+- Fcitx / Fcitx 5 for Android: `Fcitx 5 Lua` ↔ `Fcitx 5 for Android`
+- Fcitx / Fcitx 5 for Android: `Fcitx 5 Lua` ↔ `Fcitx 5 中文插件`
+- Fcitx / Fcitx 5 for Android: `Fcitx 5 for Android` ↔ `Fcitx 5 中文插件`
+- Firelight: `FMOD` ↔ `FMOD Studio`
+- Flutter: `Flutter Firebase Plugins` ↔ `Flutter ImagePicker`
+- Google: `Crashlytics` ↔ `Google Crashlytics`
+- Google: `Firebase` ↔ `Firebase Analytics`
+- Google: `Firebase` ↔ `Firebase Cloud Messaging`
+- Google: `Firebase` ↔ `Firebase Performance`
+- Google: `Firebase` ↔ `Google Firebase Analytics`
+- Google: `Firebase Analytics` ↔ `Firebase Cloud Messaging`
+- Google: `Firebase Analytics` ↔ `Firebase Performance`
+- Google: `Firebase Analytics` ↔ `Google Analytics`
+- Google: `Firebase Analytics` ↔ `Google Firebase Analytics`
+- Google: `Firebase Cloud Messaging` ↔ `Firebase Performance`
+- Google: `Firebase Performance` ↔ `Google Firebase Analytics`
+- Google: `Google AdMob` ↔ `Google Analytics`
+- Google: `Google AdMob` ↔ `Google Cast`
+- Google: `Google AdMob` ↔ `Google Crashlytics`
+- Google: `Google AdMob` ↔ `Google Firebase Analytics`
+- Google: `Google AdMob` ↔ `Google Ink (Sketchology)`
+- Google: `Google AdMob` ↔ `Google Map SDK`
+- Google: `Google AdMob` ↔ `Google Play Billing`
+- Google: `Google AdMob` ↔ `Google Play Core`
+- Google: `Google AdMob` ↔ `Google Play Games plugin for Unity`
+- Google: `Google AdMob` ↔ `Google Play Legacy Photo Picker`
+- Google: `Google AdMob` ↔ `Google Play Services`
+- Google: `Google AdMob` ↔ `Google Sign-In`
+- Google: `Google AdMob` ↔ `Google Tag Manager`
+- Google: `Google AdMob` ↔ `Google VR SDK`
+- Google: `Google AdMob` ↔ `Google WOFF2`
+- Google: `Google AdMob` ↔ `Google’s Drive API v3`
+- Google: `Google Analytics` ↔ `Google Cast`
+- Google: `Google Analytics` ↔ `Google Crashlytics`
+- Google: `Google Analytics` ↔ `Google Firebase Analytics`
+- Google: `Google Analytics` ↔ `Google Ink (Sketchology)`
+- Google: `Google Analytics` ↔ `Google Map SDK`
+- Google: `Google Analytics` ↔ `Google Play Billing`
+- Google: `Google Analytics` ↔ `Google Play Core`
+- Google: `Google Analytics` ↔ `Google Play Games plugin for Unity`
+- Google: `Google Analytics` ↔ `Google Play Legacy Photo Picker`
+- Google: `Google Analytics` ↔ `Google Play Services`
+- Google: `Google Analytics` ↔ `Google Sign-In`
+- Google: `Google Analytics` ↔ `Google Tag Manager`
+- Google: `Google Analytics` ↔ `Google VR SDK`
+- Google: `Google Analytics` ↔ `Google WOFF2`
+- Google: `Google Analytics` ↔ `Google’s Drive API v3`
+- Google: `Google Cast` ↔ `Google Crashlytics`
+- Google: `Google Cast` ↔ `Google Firebase Analytics`
+- Google: `Google Cast` ↔ `Google Ink (Sketchology)`
+- Google: `Google Cast` ↔ `Google Map SDK`
+- Google: `Google Cast` ↔ `Google Play Billing`
+- Google: `Google Cast` ↔ `Google Play Core`
+- Google: `Google Cast` ↔ `Google Play Games plugin for Unity`
+- Google: `Google Cast` ↔ `Google Play Legacy Photo Picker`
+- Google: `Google Cast` ↔ `Google Play Services`
+- Google: `Google Cast` ↔ `Google Sign-In`
+- Google: `Google Cast` ↔ `Google Tag Manager`
+- Google: `Google Cast` ↔ `Google VR SDK`
+- Google: `Google Cast` ↔ `Google WOFF2`
+- Google: `Google Cast` ↔ `Google’s Drive API v3`
+- Google: `Google Crashlytics` ↔ `Google Firebase Analytics`
+- Google: `Google Crashlytics` ↔ `Google Ink (Sketchology)`
+- Google: `Google Crashlytics` ↔ `Google Map SDK`
+- Google: `Google Crashlytics` ↔ `Google Play Billing`
+- Google: `Google Crashlytics` ↔ `Google Play Core`
+- Google: `Google Crashlytics` ↔ `Google Play Games plugin for Unity`
+- Google: `Google Crashlytics` ↔ `Google Play Legacy Photo Picker`
+- Google: `Google Crashlytics` ↔ `Google Play Services`
+- Google: `Google Crashlytics` ↔ `Google Sign-In`
+- Google: `Google Crashlytics` ↔ `Google Tag Manager`
+- Google: `Google Crashlytics` ↔ `Google VR SDK`
+- Google: `Google Crashlytics` ↔ `Google WOFF2`
+- Google: `Google Crashlytics` ↔ `Google’s Drive API v3`
+- Google: `Google Firebase Analytics` ↔ `Google Map SDK`
+- Google: `Google Firebase Analytics` ↔ `Google Play Services`
+- Google: `Google Firebase Analytics` ↔ `Google VR SDK`
+- Google: `Google Firebase Analytics` ↔ `Google WOFF2`
+- Google: `Google Ink (Sketchology)` ↔ `Google Map SDK`
+- Google: `Google Ink (Sketchology)` ↔ `Google Play Services`
+- Google: `Google Ink (Sketchology)` ↔ `Google VR SDK`
+- Google: `Google Ink (Sketchology)` ↔ `Google WOFF2`
+- Google: `Google Map SDK` ↔ `Google Play Billing`
+- Google: `Google Map SDK` ↔ `Google Play Core`
+- Google: `Google Map SDK` ↔ `Google Play Games plugin for Unity`
+- Google: `Google Map SDK` ↔ `Google Play Legacy Photo Picker`
+- Google: `Google Map SDK` ↔ `Google Play Services`
+- Google: `Google Map SDK` ↔ `Google Sign-In`
+- Google: `Google Map SDK` ↔ `Google Tag Manager`
+- Google: `Google Map SDK` ↔ `Google VR SDK`
+- Google: `Google Map SDK` ↔ `Google WOFF2`
+- Google: `Google Map SDK` ↔ `Google’s Drive API v3`
+- Google: `Google Play Billing` ↔ `Google Play Core`
+- Google: `Google Play Billing` ↔ `Google Play Games plugin for Unity`
+- Google: `Google Play Billing` ↔ `Google Play Legacy Photo Picker`
+- Google: `Google Play Billing` ↔ `Google Play Services`
+- Google: `Google Play Billing` ↔ `Google VR SDK`
+- Google: `Google Play Billing` ↔ `Google WOFF2`
+- Google: `Google Play Core` ↔ `Google Play Games plugin for Unity`
+- Google: `Google Play Core` ↔ `Google Play Legacy Photo Picker`
+- Google: `Google Play Core` ↔ `Google VR SDK`
+- Google: `Google Play Core` ↔ `Google WOFF2`
+- Google: `Google Play Core` ↔ `Jetpack Core`
+- Google: `Google Play Games plugin for Unity` ↔ `Google Play Services`
+- Google: `Google Play Games plugin for Unity` ↔ `Google VR SDK`
+- Google: `Google Play Games plugin for Unity` ↔ `Google WOFF2`
+- Google: `Google Play Legacy Photo Picker` ↔ `Google Play Services`
+- Google: `Google Play Legacy Photo Picker` ↔ `Google VR SDK`
+- Google: `Google Play Legacy Photo Picker` ↔ `Google WOFF2`
+- Google: `Google Play Services` ↔ `Google Sign-In`
+- Google: `Google Play Services` ↔ `Google Tag Manager`
+- Google: `Google Play Services` ↔ `Google VR SDK`
+- Google: `Google Play Services` ↔ `Google WOFF2`
+- Google: `Google Play Services` ↔ `Google’s Drive API v3`
+- Google: `Google Play Services` ↔ `Play Asset Delivery`
+- Google: `Google Sign-In` ↔ `Google VR SDK`
+- Google: `Google Sign-In` ↔ `Google WOFF2`
+- Google: `Google Tag Manager` ↔ `Google VR SDK`
+- Google: `Google Tag Manager` ↔ `Google WOFF2`
+- Google: `Google VR SDK` ↔ `Google WOFF2`
+- Google: `Google VR SDK` ↔ `Google’s Drive API v3`
+- Google: `Google WOFF2` ↔ `Google’s Drive API v3`
+- Google: `Jetpack Activity` ↔ `Jetpack App Startup`
+- Google: `Jetpack Activity` ↔ `Jetpack AppCompat`
+- Google: `Jetpack Activity` ↔ `Jetpack AppFunctions`
+- Google: `Jetpack Activity` ↔ `Jetpack Browser`
+- Google: `Jetpack Activity` ↔ `Jetpack Camera`
+- Google: `Jetpack Activity` ↔ `Jetpack Camera2`
+- Google: `Jetpack Activity` ↔ `Jetpack Car`
+- Google: `Jetpack Activity` ↔ `Jetpack Compose`
+- Google: `Jetpack Activity` ↔ `Jetpack Core`
+- Google: `Jetpack Activity` ↔ `Jetpack Credentials`
+- Google: `Jetpack Activity` ↔ `Jetpack DataStore`
+- Google: `Jetpack Activity` ↔ `Jetpack Glance`
+- Google: `Jetpack Activity` ↔ `Jetpack Graphics`
+- Google: `Jetpack Activity` ↔ `Jetpack Lifecycle`
+- Google: `Jetpack Activity` ↔ `Jetpack Media`
+- Google: `Jetpack Activity` ↔ `Jetpack Media Session`
+- Google: `Jetpack Activity` ↔ `Jetpack Media3`
+- Google: `Jetpack Activity` ↔ `Jetpack MediaRouter`
+- Google: `Jetpack Activity` ↔ `Jetpack PDF`
+- Google: `Jetpack Activity` ↔ `Jetpack ProfileInstaller`
+- Google: `Jetpack Activity` ↔ `Jetpack Remote Callback`
+- Google: `Jetpack Activity` ↔ `Jetpack Room`
+- Google: `Jetpack Activity` ↔ `Jetpack SQLite`
+- Google: `Jetpack Activity` ↔ `Jetpack ShareTarget`
+- Google: `Jetpack Activity` ↔ `Jetpack Slice`
+- Google: `Jetpack Activity` ↔ `Jetpack Test`
+- Google: `Jetpack Activity` ↔ `Jetpack Tracing`
+- Google: `Jetpack Activity` ↔ `Jetpack WebKit`
+- Google: `Jetpack Activity` ↔ `Jetpack WorkManager`
+- Google: `Jetpack Activity` ↔ `Jetpack XR`
+- Google: `Jetpack App Startup` ↔ `Jetpack AppCompat`
+- Google: `Jetpack App Startup` ↔ `Jetpack AppFunctions`
+- Google: `Jetpack App Startup` ↔ `Jetpack Browser`
+- Google: `Jetpack App Startup` ↔ `Jetpack Camera`
+- Google: `Jetpack App Startup` ↔ `Jetpack Camera2`
+- Google: `Jetpack App Startup` ↔ `Jetpack Car`
+- Google: `Jetpack App Startup` ↔ `Jetpack Compose`
+- Google: `Jetpack App Startup` ↔ `Jetpack Core`
+- Google: `Jetpack App Startup` ↔ `Jetpack Credentials`
+- Google: `Jetpack App Startup` ↔ `Jetpack DataStore`
+- Google: `Jetpack App Startup` ↔ `Jetpack Glance`
+- Google: `Jetpack App Startup` ↔ `Jetpack Graphics`
+- Google: `Jetpack App Startup` ↔ `Jetpack Lifecycle`
+- Google: `Jetpack App Startup` ↔ `Jetpack Media`
+- Google: `Jetpack App Startup` ↔ `Jetpack Media3`
+- Google: `Jetpack App Startup` ↔ `Jetpack MediaRouter`
+- Google: `Jetpack App Startup` ↔ `Jetpack PDF`
+- Google: `Jetpack App Startup` ↔ `Jetpack ProfileInstaller`
+- Google: `Jetpack App Startup` ↔ `Jetpack Room`
+- Google: `Jetpack App Startup` ↔ `Jetpack SQLite`
+- Google: `Jetpack App Startup` ↔ `Jetpack ShareTarget`
+- Google: `Jetpack App Startup` ↔ `Jetpack Slice`
+- Google: `Jetpack App Startup` ↔ `Jetpack Test`
+- Google: `Jetpack App Startup` ↔ `Jetpack Tracing`
+- Google: `Jetpack App Startup` ↔ `Jetpack WebKit`
+- Google: `Jetpack App Startup` ↔ `Jetpack WorkManager`
+- Google: `Jetpack App Startup` ↔ `Jetpack XR`
+- Google: `Jetpack AppCompat` ↔ `Jetpack AppFunctions`
+- Google: `Jetpack AppCompat` ↔ `Jetpack Browser`
+- Google: `Jetpack AppCompat` ↔ `Jetpack Camera`
+- Google: `Jetpack AppCompat` ↔ `Jetpack Camera2`
+- Google: `Jetpack AppCompat` ↔ `Jetpack Car`
+- Google: `Jetpack AppCompat` ↔ `Jetpack Compose`
+- Google: `Jetpack AppCompat` ↔ `Jetpack Core`
+- Google: `Jetpack AppCompat` ↔ `Jetpack Credentials`
+- Google: `Jetpack AppCompat` ↔ `Jetpack DataStore`
+- Google: `Jetpack AppCompat` ↔ `Jetpack Glance`
+- Google: `Jetpack AppCompat` ↔ `Jetpack Graphics`
+- Google: `Jetpack AppCompat` ↔ `Jetpack Lifecycle`
+- Google: `Jetpack AppCompat` ↔ `Jetpack Media`
+- Google: `Jetpack AppCompat` ↔ `Jetpack Media Session`
+- Google: `Jetpack AppCompat` ↔ `Jetpack Media3`
+- Google: `Jetpack AppCompat` ↔ `Jetpack MediaRouter`
+- Google: `Jetpack AppCompat` ↔ `Jetpack PDF`
+- Google: `Jetpack AppCompat` ↔ `Jetpack ProfileInstaller`
+- Google: `Jetpack AppCompat` ↔ `Jetpack Remote Callback`
+- Google: `Jetpack AppCompat` ↔ `Jetpack Room`
+- Google: `Jetpack AppCompat` ↔ `Jetpack SQLite`
+- Google: `Jetpack AppCompat` ↔ `Jetpack ShareTarget`
+- Google: `Jetpack AppCompat` ↔ `Jetpack Slice`
+- Google: `Jetpack AppCompat` ↔ `Jetpack Test`
+- Google: `Jetpack AppCompat` ↔ `Jetpack Tracing`
+- Google: `Jetpack AppCompat` ↔ `Jetpack WebKit`
+- Google: `Jetpack AppCompat` ↔ `Jetpack WorkManager`
+- Google: `Jetpack AppCompat` ↔ `Jetpack XR`
+- Google: `Jetpack AppFunctions` ↔ `Jetpack Browser`
+- Google: `Jetpack AppFunctions` ↔ `Jetpack Camera`
+- Google: `Jetpack AppFunctions` ↔ `Jetpack Camera2`
+- Google: `Jetpack AppFunctions` ↔ `Jetpack Car`
+- Google: `Jetpack AppFunctions` ↔ `Jetpack Compose`
+- Google: `Jetpack AppFunctions` ↔ `Jetpack Core`
+- Google: `Jetpack AppFunctions` ↔ `Jetpack Credentials`
+- Google: `Jetpack AppFunctions` ↔ `Jetpack DataStore`
+- Google: `Jetpack AppFunctions` ↔ `Jetpack Glance`
+- Google: `Jetpack AppFunctions` ↔ `Jetpack Graphics`
+- Google: `Jetpack AppFunctions` ↔ `Jetpack Lifecycle`
+- Google: `Jetpack AppFunctions` ↔ `Jetpack Media`
+- Google: `Jetpack AppFunctions` ↔ `Jetpack Media Session`
+- Google: `Jetpack AppFunctions` ↔ `Jetpack Media3`
+- Google: `Jetpack AppFunctions` ↔ `Jetpack MediaRouter`
+- Google: `Jetpack AppFunctions` ↔ `Jetpack PDF`
+- Google: `Jetpack AppFunctions` ↔ `Jetpack ProfileInstaller`
+- Google: `Jetpack AppFunctions` ↔ `Jetpack Remote Callback`
+- Google: `Jetpack AppFunctions` ↔ `Jetpack Room`
+- Google: `Jetpack AppFunctions` ↔ `Jetpack SQLite`
+- Google: `Jetpack AppFunctions` ↔ `Jetpack ShareTarget`
+- Google: `Jetpack AppFunctions` ↔ `Jetpack Slice`
+- Google: `Jetpack AppFunctions` ↔ `Jetpack Test`
+- Google: `Jetpack AppFunctions` ↔ `Jetpack Tracing`
+- Google: `Jetpack AppFunctions` ↔ `Jetpack WebKit`
+- Google: `Jetpack AppFunctions` ↔ `Jetpack WorkManager`
+- Google: `Jetpack AppFunctions` ↔ `Jetpack XR`
+- Google: `Jetpack Browser` ↔ `Jetpack Camera`
+- Google: `Jetpack Browser` ↔ `Jetpack Camera2`
+- Google: `Jetpack Browser` ↔ `Jetpack Car`
+- Google: `Jetpack Browser` ↔ `Jetpack Compose`
+- Google: `Jetpack Browser` ↔ `Jetpack Core`
+- Google: `Jetpack Browser` ↔ `Jetpack Credentials`
+- Google: `Jetpack Browser` ↔ `Jetpack DataStore`
+- Google: `Jetpack Browser` ↔ `Jetpack Glance`
+- Google: `Jetpack Browser` ↔ `Jetpack Graphics`
+- Google: `Jetpack Browser` ↔ `Jetpack Lifecycle`
+- Google: `Jetpack Browser` ↔ `Jetpack Media`
+- Google: `Jetpack Browser` ↔ `Jetpack Media Session`
+- Google: `Jetpack Browser` ↔ `Jetpack Media3`
+- Google: `Jetpack Browser` ↔ `Jetpack MediaRouter`
+- Google: `Jetpack Browser` ↔ `Jetpack PDF`
+- Google: `Jetpack Browser` ↔ `Jetpack ProfileInstaller`
+- Google: `Jetpack Browser` ↔ `Jetpack Remote Callback`
+- Google: `Jetpack Browser` ↔ `Jetpack Room`
+- Google: `Jetpack Browser` ↔ `Jetpack SQLite`
+- Google: `Jetpack Browser` ↔ `Jetpack ShareTarget`
+- Google: `Jetpack Browser` ↔ `Jetpack Slice`
+- Google: `Jetpack Browser` ↔ `Jetpack Test`
+- Google: `Jetpack Browser` ↔ `Jetpack Tracing`
+- Google: `Jetpack Browser` ↔ `Jetpack WebKit`
+- Google: `Jetpack Browser` ↔ `Jetpack WorkManager`
+- Google: `Jetpack Browser` ↔ `Jetpack XR`
+- Google: `Jetpack Camera` ↔ `Jetpack Car`
+- Google: `Jetpack Camera` ↔ `Jetpack Compose`
+- Google: `Jetpack Camera` ↔ `Jetpack Core`
+- Google: `Jetpack Camera` ↔ `Jetpack Credentials`
+- Google: `Jetpack Camera` ↔ `Jetpack DataStore`
+- Google: `Jetpack Camera` ↔ `Jetpack Glance`
+- Google: `Jetpack Camera` ↔ `Jetpack Graphics`
+- Google: `Jetpack Camera` ↔ `Jetpack Lifecycle`
+- Google: `Jetpack Camera` ↔ `Jetpack Media`
+- Google: `Jetpack Camera` ↔ `Jetpack Media Session`
+- Google: `Jetpack Camera` ↔ `Jetpack Media3`
+- Google: `Jetpack Camera` ↔ `Jetpack MediaRouter`
+- Google: `Jetpack Camera` ↔ `Jetpack PDF`
+- Google: `Jetpack Camera` ↔ `Jetpack ProfileInstaller`
+- Google: `Jetpack Camera` ↔ `Jetpack Remote Callback`
+- Google: `Jetpack Camera` ↔ `Jetpack Room`
+- Google: `Jetpack Camera` ↔ `Jetpack SQLite`
+- Google: `Jetpack Camera` ↔ `Jetpack ShareTarget`
+- Google: `Jetpack Camera` ↔ `Jetpack Slice`
+- Google: `Jetpack Camera` ↔ `Jetpack Test`
+- Google: `Jetpack Camera` ↔ `Jetpack Tracing`
+- Google: `Jetpack Camera` ↔ `Jetpack WebKit`
+- Google: `Jetpack Camera` ↔ `Jetpack WorkManager`
+- Google: `Jetpack Camera` ↔ `Jetpack XR`
+- Google: `Jetpack Camera2` ↔ `Jetpack Car`
+- Google: `Jetpack Camera2` ↔ `Jetpack Compose`
+- Google: `Jetpack Camera2` ↔ `Jetpack Core`
+- Google: `Jetpack Camera2` ↔ `Jetpack Credentials`
+- Google: `Jetpack Camera2` ↔ `Jetpack DataStore`
+- Google: `Jetpack Camera2` ↔ `Jetpack Glance`
+- Google: `Jetpack Camera2` ↔ `Jetpack Graphics`
+- Google: `Jetpack Camera2` ↔ `Jetpack Lifecycle`
+- Google: `Jetpack Camera2` ↔ `Jetpack Media`
+- Google: `Jetpack Camera2` ↔ `Jetpack Media Session`
+- Google: `Jetpack Camera2` ↔ `Jetpack Media3`
+- Google: `Jetpack Camera2` ↔ `Jetpack MediaRouter`
+- Google: `Jetpack Camera2` ↔ `Jetpack PDF`
+- Google: `Jetpack Camera2` ↔ `Jetpack ProfileInstaller`
+- Google: `Jetpack Camera2` ↔ `Jetpack Remote Callback`
+- Google: `Jetpack Camera2` ↔ `Jetpack Room`
+- Google: `Jetpack Camera2` ↔ `Jetpack SQLite`
+- Google: `Jetpack Camera2` ↔ `Jetpack ShareTarget`
+- Google: `Jetpack Camera2` ↔ `Jetpack Slice`
+- Google: `Jetpack Camera2` ↔ `Jetpack Test`
+- Google: `Jetpack Camera2` ↔ `Jetpack Tracing`
+- Google: `Jetpack Camera2` ↔ `Jetpack WebKit`
+- Google: `Jetpack Camera2` ↔ `Jetpack WorkManager`
+- Google: `Jetpack Camera2` ↔ `Jetpack XR`
+- Google: `Jetpack Car` ↔ `Jetpack Compose`
+- Google: `Jetpack Car` ↔ `Jetpack Core`
+- Google: `Jetpack Car` ↔ `Jetpack Credentials`
+- Google: `Jetpack Car` ↔ `Jetpack DataStore`
+- Google: `Jetpack Car` ↔ `Jetpack Glance`
+- Google: `Jetpack Car` ↔ `Jetpack Graphics`
+- Google: `Jetpack Car` ↔ `Jetpack Lifecycle`
+- Google: `Jetpack Car` ↔ `Jetpack Media`
+- Google: `Jetpack Car` ↔ `Jetpack Media Session`
+- Google: `Jetpack Car` ↔ `Jetpack Media3`
+- Google: `Jetpack Car` ↔ `Jetpack MediaRouter`
+- Google: `Jetpack Car` ↔ `Jetpack PDF`
+- Google: `Jetpack Car` ↔ `Jetpack ProfileInstaller`
+- Google: `Jetpack Car` ↔ `Jetpack Remote Callback`
+- Google: `Jetpack Car` ↔ `Jetpack Room`
+- Google: `Jetpack Car` ↔ `Jetpack SQLite`
+- Google: `Jetpack Car` ↔ `Jetpack ShareTarget`
+- Google: `Jetpack Car` ↔ `Jetpack Slice`
+- Google: `Jetpack Car` ↔ `Jetpack Test`
+- Google: `Jetpack Car` ↔ `Jetpack Tracing`
+- Google: `Jetpack Car` ↔ `Jetpack WebKit`
+- Google: `Jetpack Car` ↔ `Jetpack WorkManager`
+- Google: `Jetpack Car` ↔ `Jetpack XR`
+- Google: `Jetpack Compose` ↔ `Jetpack Core`
+- Google: `Jetpack Compose` ↔ `Jetpack Credentials`
+- Google: `Jetpack Compose` ↔ `Jetpack DataStore`
+- Google: `Jetpack Compose` ↔ `Jetpack Glance`
+- Google: `Jetpack Compose` ↔ `Jetpack Graphics`
+- Google: `Jetpack Compose` ↔ `Jetpack Lifecycle`
+- Google: `Jetpack Compose` ↔ `Jetpack Media`
+- Google: `Jetpack Compose` ↔ `Jetpack Media Session`
+- Google: `Jetpack Compose` ↔ `Jetpack Media3`
+- Google: `Jetpack Compose` ↔ `Jetpack MediaRouter`
+- Google: `Jetpack Compose` ↔ `Jetpack PDF`
+- Google: `Jetpack Compose` ↔ `Jetpack ProfileInstaller`
+- Google: `Jetpack Compose` ↔ `Jetpack Remote Callback`
+- Google: `Jetpack Compose` ↔ `Jetpack Room`
+- Google: `Jetpack Compose` ↔ `Jetpack SQLite`
+- Google: `Jetpack Compose` ↔ `Jetpack ShareTarget`
+- Google: `Jetpack Compose` ↔ `Jetpack Slice`
+- Google: `Jetpack Compose` ↔ `Jetpack Test`
+- Google: `Jetpack Compose` ↔ `Jetpack Tracing`
+- Google: `Jetpack Compose` ↔ `Jetpack WebKit`
+- Google: `Jetpack Compose` ↔ `Jetpack WorkManager`
+- Google: `Jetpack Compose` ↔ `Jetpack XR`
+- Google: `Jetpack Core` ↔ `Jetpack Credentials`
+- Google: `Jetpack Core` ↔ `Jetpack DataStore`
+- Google: `Jetpack Core` ↔ `Jetpack Glance`
+- Google: `Jetpack Core` ↔ `Jetpack Graphics`
+- Google: `Jetpack Core` ↔ `Jetpack Lifecycle`
+- Google: `Jetpack Core` ↔ `Jetpack Media`
+- Google: `Jetpack Core` ↔ `Jetpack Media Session`
+- Google: `Jetpack Core` ↔ `Jetpack Media3`
+- Google: `Jetpack Core` ↔ `Jetpack MediaRouter`
+- Google: `Jetpack Core` ↔ `Jetpack PDF`
+- Google: `Jetpack Core` ↔ `Jetpack ProfileInstaller`
+- Google: `Jetpack Core` ↔ `Jetpack Remote Callback`
+- Google: `Jetpack Core` ↔ `Jetpack Room`
+- Google: `Jetpack Core` ↔ `Jetpack SQLite`
+- Google: `Jetpack Core` ↔ `Jetpack ShareTarget`
+- Google: `Jetpack Core` ↔ `Jetpack Slice`
+- Google: `Jetpack Core` ↔ `Jetpack Test`
+- Google: `Jetpack Core` ↔ `Jetpack Tracing`
+- Google: `Jetpack Core` ↔ `Jetpack WebKit`
+- Google: `Jetpack Core` ↔ `Jetpack WorkManager`
+- Google: `Jetpack Core` ↔ `Jetpack XR`
+- Google: `Jetpack Credentials` ↔ `Jetpack DataStore`
+- Google: `Jetpack Credentials` ↔ `Jetpack Glance`
+- Google: `Jetpack Credentials` ↔ `Jetpack Graphics`
+- Google: `Jetpack Credentials` ↔ `Jetpack Lifecycle`
+- Google: `Jetpack Credentials` ↔ `Jetpack Media`
+- Google: `Jetpack Credentials` ↔ `Jetpack Media Session`
+- Google: `Jetpack Credentials` ↔ `Jetpack Media3`
+- Google: `Jetpack Credentials` ↔ `Jetpack MediaRouter`
+- Google: `Jetpack Credentials` ↔ `Jetpack PDF`
+- Google: `Jetpack Credentials` ↔ `Jetpack ProfileInstaller`
+- Google: `Jetpack Credentials` ↔ `Jetpack Remote Callback`
+- Google: `Jetpack Credentials` ↔ `Jetpack Room`
+- Google: `Jetpack Credentials` ↔ `Jetpack SQLite`
+- Google: `Jetpack Credentials` ↔ `Jetpack ShareTarget`
+- Google: `Jetpack Credentials` ↔ `Jetpack Slice`
+- Google: `Jetpack Credentials` ↔ `Jetpack Test`
+- Google: `Jetpack Credentials` ↔ `Jetpack Tracing`
+- Google: `Jetpack Credentials` ↔ `Jetpack WebKit`
+- Google: `Jetpack Credentials` ↔ `Jetpack WorkManager`
+- Google: `Jetpack Credentials` ↔ `Jetpack XR`
+- Google: `Jetpack DataStore` ↔ `Jetpack Glance`
+- Google: `Jetpack DataStore` ↔ `Jetpack Graphics`
+- Google: `Jetpack DataStore` ↔ `Jetpack Lifecycle`
+- Google: `Jetpack DataStore` ↔ `Jetpack Media`
+- Google: `Jetpack DataStore` ↔ `Jetpack Media Session`
+- Google: `Jetpack DataStore` ↔ `Jetpack Media3`
+- Google: `Jetpack DataStore` ↔ `Jetpack MediaRouter`
+- Google: `Jetpack DataStore` ↔ `Jetpack PDF`
+- Google: `Jetpack DataStore` ↔ `Jetpack ProfileInstaller`
+- Google: `Jetpack DataStore` ↔ `Jetpack Remote Callback`
+- Google: `Jetpack DataStore` ↔ `Jetpack Room`
+- Google: `Jetpack DataStore` ↔ `Jetpack SQLite`
+- Google: `Jetpack DataStore` ↔ `Jetpack ShareTarget`
+- Google: `Jetpack DataStore` ↔ `Jetpack Slice`
+- Google: `Jetpack DataStore` ↔ `Jetpack Test`
+- Google: `Jetpack DataStore` ↔ `Jetpack Tracing`
+- Google: `Jetpack DataStore` ↔ `Jetpack WebKit`
+- Google: `Jetpack DataStore` ↔ `Jetpack WorkManager`
+- Google: `Jetpack DataStore` ↔ `Jetpack XR`
+- Google: `Jetpack Glance` ↔ `Jetpack Graphics`
+- Google: `Jetpack Glance` ↔ `Jetpack Lifecycle`
+- Google: `Jetpack Glance` ↔ `Jetpack Media`
+- Google: `Jetpack Glance` ↔ `Jetpack Media Session`
+- Google: `Jetpack Glance` ↔ `Jetpack Media3`
+- Google: `Jetpack Glance` ↔ `Jetpack MediaRouter`
+- Google: `Jetpack Glance` ↔ `Jetpack PDF`
+- Google: `Jetpack Glance` ↔ `Jetpack ProfileInstaller`
+- Google: `Jetpack Glance` ↔ `Jetpack Remote Callback`
+- Google: `Jetpack Glance` ↔ `Jetpack Room`
+- Google: `Jetpack Glance` ↔ `Jetpack SQLite`
+- Google: `Jetpack Glance` ↔ `Jetpack ShareTarget`
+- Google: `Jetpack Glance` ↔ `Jetpack Slice`
+- Google: `Jetpack Glance` ↔ `Jetpack Test`
+- Google: `Jetpack Glance` ↔ `Jetpack Tracing`
+- Google: `Jetpack Glance` ↔ `Jetpack WebKit`
+- Google: `Jetpack Glance` ↔ `Jetpack WorkManager`
+- Google: `Jetpack Glance` ↔ `Jetpack XR`
+- Google: `Jetpack Graphics` ↔ `Jetpack Lifecycle`
+- Google: `Jetpack Graphics` ↔ `Jetpack Media`
+- Google: `Jetpack Graphics` ↔ `Jetpack Media Session`
+- Google: `Jetpack Graphics` ↔ `Jetpack Media3`
+- Google: `Jetpack Graphics` ↔ `Jetpack MediaRouter`
+- Google: `Jetpack Graphics` ↔ `Jetpack PDF`
+- Google: `Jetpack Graphics` ↔ `Jetpack ProfileInstaller`
+- Google: `Jetpack Graphics` ↔ `Jetpack Remote Callback`
+- Google: `Jetpack Graphics` ↔ `Jetpack Room`
+- Google: `Jetpack Graphics` ↔ `Jetpack SQLite`
+- Google: `Jetpack Graphics` ↔ `Jetpack ShareTarget`
+- Google: `Jetpack Graphics` ↔ `Jetpack Slice`
+- Google: `Jetpack Graphics` ↔ `Jetpack Test`
+- Google: `Jetpack Graphics` ↔ `Jetpack Tracing`
+- Google: `Jetpack Graphics` ↔ `Jetpack WebKit`
+- Google: `Jetpack Graphics` ↔ `Jetpack WorkManager`
+- Google: `Jetpack Graphics` ↔ `Jetpack XR`
+- Google: `Jetpack Lifecycle` ↔ `Jetpack Media`
+- Google: `Jetpack Lifecycle` ↔ `Jetpack Media Session`
+- Google: `Jetpack Lifecycle` ↔ `Jetpack Media3`
+- Google: `Jetpack Lifecycle` ↔ `Jetpack MediaRouter`
+- Google: `Jetpack Lifecycle` ↔ `Jetpack PDF`
+- Google: `Jetpack Lifecycle` ↔ `Jetpack ProfileInstaller`
+- Google: `Jetpack Lifecycle` ↔ `Jetpack Remote Callback`
+- Google: `Jetpack Lifecycle` ↔ `Jetpack Room`
+- Google: `Jetpack Lifecycle` ↔ `Jetpack SQLite`
+- Google: `Jetpack Lifecycle` ↔ `Jetpack ShareTarget`
+- Google: `Jetpack Lifecycle` ↔ `Jetpack Slice`
+- Google: `Jetpack Lifecycle` ↔ `Jetpack Test`
+- Google: `Jetpack Lifecycle` ↔ `Jetpack Tracing`
+- Google: `Jetpack Lifecycle` ↔ `Jetpack WebKit`
+- Google: `Jetpack Lifecycle` ↔ `Jetpack WorkManager`
+- Google: `Jetpack Lifecycle` ↔ `Jetpack XR`
+- Google: `Jetpack Media` ↔ `Jetpack Media Session`
+- Google: `Jetpack Media` ↔ `Jetpack MediaRouter`
+- Google: `Jetpack Media` ↔ `Jetpack PDF`
+- Google: `Jetpack Media` ↔ `Jetpack ProfileInstaller`
+- Google: `Jetpack Media` ↔ `Jetpack Remote Callback`
+- Google: `Jetpack Media` ↔ `Jetpack Room`
+- Google: `Jetpack Media` ↔ `Jetpack SQLite`
+- Google: `Jetpack Media` ↔ `Jetpack ShareTarget`
+- Google: `Jetpack Media` ↔ `Jetpack Slice`
+- Google: `Jetpack Media` ↔ `Jetpack Test`
+- Google: `Jetpack Media` ↔ `Jetpack Tracing`
+- Google: `Jetpack Media` ↔ `Jetpack WebKit`
+- Google: `Jetpack Media` ↔ `Jetpack WorkManager`
+- Google: `Jetpack Media` ↔ `Jetpack XR`
+- Google: `Jetpack Media Session` ↔ `Jetpack Media3`
+- Google: `Jetpack Media Session` ↔ `Jetpack MediaRouter`
+- Google: `Jetpack Media Session` ↔ `Jetpack PDF`
+- Google: `Jetpack Media Session` ↔ `Jetpack ProfileInstaller`
+- Google: `Jetpack Media Session` ↔ `Jetpack Room`
+- Google: `Jetpack Media Session` ↔ `Jetpack SQLite`
+- Google: `Jetpack Media Session` ↔ `Jetpack ShareTarget`
+- Google: `Jetpack Media Session` ↔ `Jetpack Slice`
+- Google: `Jetpack Media Session` ↔ `Jetpack Test`
+- Google: `Jetpack Media Session` ↔ `Jetpack Tracing`
+- Google: `Jetpack Media Session` ↔ `Jetpack WebKit`
+- Google: `Jetpack Media Session` ↔ `Jetpack WorkManager`
+- Google: `Jetpack Media Session` ↔ `Jetpack XR`
+- Google: `Jetpack Media3` ↔ `Jetpack MediaRouter`
+- Google: `Jetpack Media3` ↔ `Jetpack PDF`
+- Google: `Jetpack Media3` ↔ `Jetpack ProfileInstaller`
+- Google: `Jetpack Media3` ↔ `Jetpack Remote Callback`
+- Google: `Jetpack Media3` ↔ `Jetpack Room`
+- Google: `Jetpack Media3` ↔ `Jetpack SQLite`
+- Google: `Jetpack Media3` ↔ `Jetpack ShareTarget`
+- Google: `Jetpack Media3` ↔ `Jetpack Slice`
+- Google: `Jetpack Media3` ↔ `Jetpack Test`
+- Google: `Jetpack Media3` ↔ `Jetpack Tracing`
+- Google: `Jetpack Media3` ↔ `Jetpack WebKit`
+- Google: `Jetpack Media3` ↔ `Jetpack WorkManager`
+- Google: `Jetpack Media3` ↔ `Jetpack XR`
+- Google: `Jetpack MediaRouter` ↔ `Jetpack PDF`
+- Google: `Jetpack MediaRouter` ↔ `Jetpack ProfileInstaller`
+- Google: `Jetpack MediaRouter` ↔ `Jetpack Remote Callback`
+- Google: `Jetpack MediaRouter` ↔ `Jetpack Room`
+- Google: `Jetpack MediaRouter` ↔ `Jetpack SQLite`
+- Google: `Jetpack MediaRouter` ↔ `Jetpack ShareTarget`
+- Google: `Jetpack MediaRouter` ↔ `Jetpack Slice`
+- Google: `Jetpack MediaRouter` ↔ `Jetpack Test`
+- Google: `Jetpack MediaRouter` ↔ `Jetpack Tracing`
+- Google: `Jetpack MediaRouter` ↔ `Jetpack WebKit`
+- Google: `Jetpack MediaRouter` ↔ `Jetpack WorkManager`
+- Google: `Jetpack MediaRouter` ↔ `Jetpack XR`
+- Google: `Jetpack PDF` ↔ `Jetpack ProfileInstaller`
+- Google: `Jetpack PDF` ↔ `Jetpack Remote Callback`
+- Google: `Jetpack PDF` ↔ `Jetpack Room`
+- Google: `Jetpack PDF` ↔ `Jetpack SQLite`
+- Google: `Jetpack PDF` ↔ `Jetpack ShareTarget`
+- Google: `Jetpack PDF` ↔ `Jetpack Slice`
+- Google: `Jetpack PDF` ↔ `Jetpack Test`
+- Google: `Jetpack PDF` ↔ `Jetpack Tracing`
+- Google: `Jetpack PDF` ↔ `Jetpack WebKit`
+- Google: `Jetpack PDF` ↔ `Jetpack WorkManager`
+- Google: `Jetpack PDF` ↔ `Jetpack XR`
+- Google: `Jetpack ProfileInstaller` ↔ `Jetpack Remote Callback`
+- Google: `Jetpack ProfileInstaller` ↔ `Jetpack Room`
+- Google: `Jetpack ProfileInstaller` ↔ `Jetpack SQLite`
+- Google: `Jetpack ProfileInstaller` ↔ `Jetpack ShareTarget`
+- Google: `Jetpack ProfileInstaller` ↔ `Jetpack Slice`
+- Google: `Jetpack ProfileInstaller` ↔ `Jetpack Test`
+- Google: `Jetpack ProfileInstaller` ↔ `Jetpack Tracing`
+- Google: `Jetpack ProfileInstaller` ↔ `Jetpack WebKit`
+- Google: `Jetpack ProfileInstaller` ↔ `Jetpack WorkManager`
+- Google: `Jetpack ProfileInstaller` ↔ `Jetpack XR`
+- Google: `Jetpack Remote Callback` ↔ `Jetpack Room`
+- Google: `Jetpack Remote Callback` ↔ `Jetpack SQLite`
+- Google: `Jetpack Remote Callback` ↔ `Jetpack ShareTarget`
+- Google: `Jetpack Remote Callback` ↔ `Jetpack Slice`
+- Google: `Jetpack Remote Callback` ↔ `Jetpack Test`
+- Google: `Jetpack Remote Callback` ↔ `Jetpack Tracing`
+- Google: `Jetpack Remote Callback` ↔ `Jetpack WebKit`
+- Google: `Jetpack Remote Callback` ↔ `Jetpack WorkManager`
+- Google: `Jetpack Remote Callback` ↔ `Jetpack XR`
+- Google: `Jetpack Room` ↔ `Jetpack SQLite`
+- Google: `Jetpack Room` ↔ `Jetpack ShareTarget`
+- Google: `Jetpack Room` ↔ `Jetpack Slice`
+- Google: `Jetpack Room` ↔ `Jetpack Test`
+- Google: `Jetpack Room` ↔ `Jetpack Tracing`
+- Google: `Jetpack Room` ↔ `Jetpack WebKit`
+- Google: `Jetpack Room` ↔ `Jetpack WorkManager`
+- Google: `Jetpack Room` ↔ `Jetpack XR`
+- Google: `Jetpack SQLite` ↔ `Jetpack ShareTarget`
+- Google: `Jetpack SQLite` ↔ `Jetpack Slice`
+- Google: `Jetpack SQLite` ↔ `Jetpack Test`
+- Google: `Jetpack SQLite` ↔ `Jetpack Tracing`
+- Google: `Jetpack SQLite` ↔ `Jetpack WebKit`
+- Google: `Jetpack SQLite` ↔ `Jetpack WorkManager`
+- Google: `Jetpack SQLite` ↔ `Jetpack XR`
+- Google: `Jetpack ShareTarget` ↔ `Jetpack Slice`
+- Google: `Jetpack ShareTarget` ↔ `Jetpack Test`
+- Google: `Jetpack ShareTarget` ↔ `Jetpack Tracing`
+- Google: `Jetpack ShareTarget` ↔ `Jetpack WebKit`
+- Google: `Jetpack ShareTarget` ↔ `Jetpack WorkManager`
+- Google: `Jetpack ShareTarget` ↔ `Jetpack XR`
+- Google: `Jetpack Slice` ↔ `Jetpack Test`
+- Google: `Jetpack Slice` ↔ `Jetpack Tracing`
+- Google: `Jetpack Slice` ↔ `Jetpack WebKit`
+- Google: `Jetpack Slice` ↔ `Jetpack WorkManager`
+- Google: `Jetpack Slice` ↔ `Jetpack XR`
+- Google: `Jetpack Test` ↔ `Jetpack Tracing`
+- Google: `Jetpack Test` ↔ `Jetpack WebKit`
+- Google: `Jetpack Test` ↔ `Jetpack WorkManager`
+- Google: `Jetpack Test` ↔ `Jetpack XR`
+- Google: `Jetpack Tracing` ↔ `Jetpack WebKit`
+- Google: `Jetpack Tracing` ↔ `Jetpack WorkManager`
+- Google: `Jetpack Tracing` ↔ `Jetpack XR`
+- Google: `Jetpack WebKit` ↔ `Jetpack WorkManager`
+- Google: `Jetpack WebKit` ↔ `Jetpack XR`
+- Google: `Jetpack WorkManager` ↔ `Jetpack XR`
+- Google: `MediaPipe LLM Inference` ↔ `MediaPipe Tasks`
+- Heytap: `Oppo Advertising Alliance` ↔ `Oppo Push Service`
+- Huawei: `HMS Analytics Kit` ↔ `HMS Audio Kit`
+- Huawei: `HMS Analytics Kit` ↔ `HMS Business Touch Kit`
+- Huawei: `HMS Analytics Kit` ↔ `HMS Core`
+- Huawei: `HMS Analytics Kit` ↔ `HMS Core AAID`
+- Huawei: `HMS Analytics Kit` ↔ `HMS Health Kit`
+- Huawei: `HMS Analytics Kit` ↔ `HMS ML Kit`
+- Huawei: `HMS Analytics Kit` ↔ `HMS Scan Kit`
+- Huawei: `HMS Analytics Kit` ↔ `HMS Update`
+- Huawei: `HMS Analytics Kit` ↔ `HMS Video Kit`
+- Huawei: `HMS Audio Kit` ↔ `HMS Business Touch Kit`
+- Huawei: `HMS Audio Kit` ↔ `HMS Core`
+- Huawei: `HMS Audio Kit` ↔ `HMS Core AAID`
+- Huawei: `HMS Audio Kit` ↔ `HMS Health Kit`
+- Huawei: `HMS Audio Kit` ↔ `HMS ML Kit`
+- Huawei: `HMS Audio Kit` ↔ `HMS Scan Kit`
+- Huawei: `HMS Audio Kit` ↔ `HMS Update`
+- Huawei: `HMS Audio Kit` ↔ `HMS Video Kit`
+- Huawei: `HMS Business Touch Kit` ↔ `HMS Core`
+- Huawei: `HMS Business Touch Kit` ↔ `HMS Health Kit`
+- Huawei: `HMS Business Touch Kit` ↔ `HMS ML Kit`
+- Huawei: `HMS Business Touch Kit` ↔ `HMS Scan Kit`
+- Huawei: `HMS Business Touch Kit` ↔ `HMS Update`
+- Huawei: `HMS Business Touch Kit` ↔ `HMS Video Kit`
+- Huawei: `HMS Core` ↔ `HMS Health Kit`
+- Huawei: `HMS Core` ↔ `HMS ML Kit`
+- Huawei: `HMS Core` ↔ `HMS Scan Kit`
+- Huawei: `HMS Core` ↔ `HMS Update`
+- Huawei: `HMS Core` ↔ `HMS Video Kit`
+- Huawei: `HMS Core AAID` ↔ `HMS Health Kit`
+- Huawei: `HMS Core AAID` ↔ `HMS ML Kit`
+- Huawei: `HMS Core AAID` ↔ `HMS Scan Kit`
+- Huawei: `HMS Core AAID` ↔ `HMS Update`
+- Huawei: `HMS Core AAID` ↔ `HMS Video Kit`
+- Huawei: `HMS Health Kit` ↔ `HMS ML Kit`
+- Huawei: `HMS Health Kit` ↔ `HMS Scan Kit`
+- Huawei: `HMS Health Kit` ↔ `HMS Update`
+- Huawei: `HMS Health Kit` ↔ `HMS Video Kit`
+- Huawei: `HMS ML Kit` ↔ `HMS Scan Kit`
+- Huawei: `HMS ML Kit` ↔ `HMS Update`
+- Huawei: `HMS ML Kit` ↔ `HMS Video Kit`
+- Huawei: `HMS Scan Kit` ↔ `HMS Update`
+- Huawei: `HMS Scan Kit` ↔ `HMS Video Kit`
+- Huawei: `HMS Update` ↔ `HMS Video Kit`
+- Huawei: `HUAWEI Ads Kit` ↔ `Huawei Ads SDK`
+- Huawei: `HUAWEI Ads Kit` ↔ `Huawei Push`
+- Huawei: `HUAWEI CaaS Engine` ↔ `Huawei DTM`
+- Huawei: `Huawei Ads SDK` ↔ `Huawei Push`
+- Mapbox: `Mapbox GL Native` ↔ `Mapbox Maps SDK`
+- Meizu Telecom Equipment Co., Ltd.: `Meizu Ads` ↔ `Meizu message push service`
+- Microsoft: `App Center` ↔ `Intune App SDK`
+- NetEase: `NetEase Qiyukf` ↔ `NetEase Yidun QuickLogin`
+- OPPO: `OPPO Push` ↔ `OPPO 安全检测 SDK`
+- OPPO: `OPPO 安全检测 SDK` ↔ `OPPO 广告 SDK`
+- Software Mansion: `React Native Screens` ↔ `React Native Worklets`
+- Stripe: `Stripe Payments` ↔ `Stripe SDK`
+- Tencent: `Kona 国密套件` ↔ `国密套件`
+- Tencent: `Tencent Cloud TRTC/LiteAV` ↔ `Tencent SHLogin`
+- Tencent: `Tencent Face Verification (Huiyan)` ↔ `Tencent SHLogin`
+- Tencent: `Tencent QCloud LogUtils` ↔ `Tencent SHLogin`
+- Tencent: `Tencent RMonitor APM` ↔ `Tencent SHLogin`
+- Tencent: `腾讯云实时音视频` ↔ `腾讯云实时音视频 SDK`
+- Tencent: `腾讯游戏 GCloud` ↔ `腾讯游戏 MSDK`
+- Tencent Holdings Limited: `Tencent Advertising` ↔ `Tencent Browser Service (X5 Kernel)`
+- Tencent Holdings Limited: `Tencent Advertising` ↔ `Tencent Bugly`
+- Tencent Holdings Limited: `Tencent Advertising` ↔ `Tencent Mobile Analytics`
+- Tencent Holdings Limited: `Tencent Advertising` ↔ `Tencent Mobile Push`
+- Tencent Holdings Limited: `Tencent Advertising` ↔ `Tencent Tinker hot update`
+- Tencent Holdings Limited: `Tencent Browser Service (X5 Kernel)` ↔ `Tencent Bugly`
+- Tencent Holdings Limited: `Tencent Browser Service (X5 Kernel)` ↔ `Tencent Mobile Push`
+- Tencent Holdings Limited: `Tencent Bugly` ↔ `Tencent Mobile Analytics`
+- Tencent Holdings Limited: `Tencent Bugly` ↔ `Tencent Mobile Push`
+- Tencent Holdings Limited: `Tencent Bugly` ↔ `Tencent Tinker hot update`
+- Tencent Holdings Limited: `Tencent Mobile Analytics` ↔ `Tencent Mobile Push`
+- Tencent Holdings Limited: `Tencent Mobile Push` ↔ `Tencent Tinker hot update`
+- Tencent Inc.: `WeChat NFC` ↔ `WeChat advertisement`
+- UC: `U4 内核` ↔ `UC 内核`
+- Unity: `Unity Ads` ↔ `Unity Mobile Notifications`
+- Unity: `Unity Ads` ↔ `Unity Services Ads`
+- Unity: `Unity Ads` ↔ `Unity WebGL Host`
+- Unity: `Unity Mobile Notifications` ↔ `Unity Mono`
+- Unity: `Unity Mobile Notifications` ↔ `Unity Services Ads`
+- Unity: `Unity Mono` ↔ `Unity WebGL Host`
+- Unity: `Unity Services Ads` ↔ `Unity WebGL Host`
+- Unity Technologies: `Unity` ↔ `Unity Ads`
+- Xiaomi Inc.: `Xiaomi Application Check Update SDK` ↔ `Xiaomi Push`
+- Xiaomi Inc.: `Xiaomi Mobile Ads Alliance (Mimo Ad SDK)` ↔ `Xiaomi Push`
+- adjust: `Adjust` ↔ `Adjust Unbotify`
+- amazon: `Amazon Analytics (Amazon insights)` ↔ `Amazon Mobile Analytics (Amplify)`
+- amazon: `Amazon Mobile Analytics (Amplify)` ↔ `Amazon Mobile Associates`
+- appcenter: `Microsoft Visual Studio App Center Analytics` ↔ `Microsoft Visual Studio App Center Crashes`
+- baidu: `Baidu APPX` ↔ `Baidu Location`
+- baidu: `Baidu APPX` ↔ `Baidu Map`
+- baidu: `Baidu APPX` ↔ `Baidu Mobile Stat`
+- baidu: `Baidu APPX` ↔ `Baidu Navigation`
+- baidu: `Baidu Location` ↔ `Baidu Map`
+- baidu: `Baidu Location` ↔ `Baidu Mobile Stat`
+- baidu: `Baidu Location` ↔ `Baidu Navigation`
+- baidu: `Baidu Map` ↔ `Baidu Mobile Stat`
+- baidu: `Baidu Map` ↔ `Baidu Navigation`
+- baidu: `Baidu Mobile Stat` ↔ `Baidu Navigation`
+- mrousavy: `React Native MMKV` ↔ `React Native Vision Camera`
+- mrousavy: `React Native MMKV` ↔ `react-native-mmkv`
+- mrousavy: `React Native Vision Camera` ↔ `react-native-mmkv`
+- qq: `Tencent MTA` ↔ `Tencent Map LBS`
+- qq: `Tencent MTA` ↔ `Tencent Stats`
+- qq: `Tencent Map LBS` ↔ `Tencent Stats`
+- software-mansion: `React Native Gesture Handler` ↔ `React Native Reanimated`
+- software-mansion: `React Native Gesture Handler` ↔ `react-native-picker`
+- software-mansion: `React Native Gesture Handler` ↔ `react-native-svg`
+- software-mansion: `React Native Reanimated` ↔ `react-native-picker`
+- software-mansion: `React Native Reanimated` ↔ `react-native-svg`
+- software-mansion: `react-native-picker` ↔ `react-native-svg`
+- umeng: `Umeng Analytics` ↔ `Umeng Feedback`
+- vivo: `vivo Push` ↔ `vivo 网游联运 SDK`
