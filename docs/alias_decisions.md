@@ -63,3 +63,21 @@ primary 模拟（RuleDedup 口径：置信度→锚点数定主条目，category
 - HUAWEI Ads Kit：other → **ads**（regex 缺 "Ads Kit"）
 - Huawei Mobile Services (HMS) Core / Core Library：other → **framework**（共 10 实体；regex 缺 "HMS Core"，HMS Push 被更早的 push 组截获不受影响）
 - 脚本侧 CAT_RULES 同步增补（两侧），快照外科补丁 11 实体；复跑 primary 模拟全组 category 归位
+
+## F. 第二批（2026-09-26 装机复验出土，5 对 + 1 前缀卫生）
+
+设备实测（SDK 库搜索 "Pangle" 出双实体）+ 过宽前缀全库扫描（<3 段但仅厂商独占域合法）联合出土：
+
+| 别名 → 规范名 | 证据 |
+|---|---|
+| Pangle → Pangle SDK | 同名直系（oF2pks 三实体 com.pgl/com.pangle.global/过宽 com.bytedance） |
+| AppLovin (MAX and SparkLabs) → AppLovin MAX | MobSF/Exodus 对同一 com.applovin SDK 的收录名（已在 A3 引用） |
+| Twitter MoPub → MoPub Ads | 同 SDK 双时代名（Twitter 持有期），共持 com.mopub |
+| TopOn → TopOn SDK | 同产品短名/全名，共持 com.anythink |
+| SAP CDC (Gigya) → Gigya | SAP 收购 Gigya 后产品名，共持厂商独占域 com.gigya |
+
+**前缀卫生**：Pangle 实体的 `com.bytedance`（2 段无尾点）已剥离——该前缀 startsWith 会把全字节系 SDK 误报为 Pangle；`com.pgl`/`com.pangle.global` 保留（品牌独占）。
+
+**延后候选（未合，缺官方佐证）**：Mobvista → Mintegral（厂商更名线，需核 com.mobvista 命名空间现行归属）。
+
+合计：aliases 17 → **22**。

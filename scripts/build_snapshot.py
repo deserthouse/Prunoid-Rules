@@ -74,6 +74,12 @@ ALIAS_MERGES = {
     "Google Ads": "Google AdMob",
     "Oppo Advertising Alliance": "OPPO 广告 SDK",
     "Huawei Mobile Services (HMS) Core Library": "Huawei Mobile Services (HMS) Core",
+    # 批H 第二批（设备实测+过宽前缀扫描出土）
+    "Pangle": "Pangle SDK",
+    "AppLovin (MAX and SparkLabs)": "AppLovin MAX",
+    "Twitter MoPub": "MoPub Ads",
+    "TopOn": "TopOn SDK",
+    "SAP CDC (Gigya)": "Gigya",
 }
 
 def categorize(name):
