@@ -81,3 +81,20 @@ primary 模拟（RuleDedup 口径：置信度→锚点数定主条目，category
 **延后候选（未合，缺官方佐证）**：Mobvista → Mintegral（厂商更名线，需核 com.mobvista 命名空间现行归属）。
 
 合计：aliases 17 → **22**。
+
+## G. 第三批收尾（2026-09-26，双名独占域扫描 28 对 + 两处数据卫生）
+
+**扫描口径升级**：恰好两名共持的 ns3（厂商独占域）全列举——补齐前两批 shared≥2 门槛漏掉的单域对。裁决：
+
+**合并 28 对**（双语名/新旧名/同产品异写，每对共持厂商独占域）：
+Adjust SDK→Adjust · Ali TBAuth→Ali Account SDK · 金融级实人认证 SDK→Aliyun DTF Face Verify · 实人认证 SDK→Aliyun RealIdentity · AutoNavi/Amap→高德地图 SDK · Baidu Cloud Push→百度云推送 · Bugly→Tencent Bugly · DataFinder analysis→DataFinder · Facebook Flipper→Flipper · HMS Core Ads SDK→HUAWEI Ads Kit（openalliance 同域，A4 同源）· Honor Ad Alliance→荣耀广告 SDK · Jetpack Media Session→Jetpack Media3（media3-session 即 Media3 artifact）· Kuaishou Advertising Alliance→快手广告 SDK · Kwai 快手联盟→快手广告 SDK · Mapbox Maps SDK→Mapbox · Sobot Chat SDK→智齿客服 SDK · Stripe Payments→Stripe SDK · TapSDK→TapTap 开发者服务 · Tencent Browser Service (X5)→腾讯浏览服务（TBS）· Tencent Mobile Analytics→腾讯移动分析 · Tinker→Tencent Tinker hot update · Umeng Push Platform→友盟推送 · VirtualAPK Framework→VirtualAPK · VirtualApp Framework→VirtualApp · Vivo message push service→vivo Push · Xiaomi Mobile Ads Alliance (Mimo)→小米广告 SDK · 人脸核身 SDK→Tencent Face Verification (Huiyan) · **Mobvista→Mintegral**（联网定案：母子公司 + SDK 命名空间演进链 com.mobvista→com.mintegral→com.mbridge，Exodus/MobSF 单 tracker 收录）
+
+**保持独立**（共持域=框架层命名空间或子产品关系）：Alibaba Baichuan Advertising↔百川电商授权（广告 vs 电商模块）· Amazon 两产品（com.amazon.device 框架域）· Baidu Advertising↔智能小程序（swan.game.ad 为小程序游戏广告精确锚，合法）· Baidu Location↔百度地图（定位 vs 地图）· Douyin 两对（Pangle 实体的 LibChecker 上游并集噪声）· Flutter↔FlutterFire · GMP Push↔MiPush（GMP=多厂商推送聚合，锚点精确）· GeckoView↔Mozilla Telemetry · JD CPS↔京媒 · MS AppCenter↔Mobile Engagement（azure 框架域）· Rongyun push↔融云 IM（推送通道 vs IM）· TRTC↔QCloud LogUtils（qcloud 框架域）· WeChat Location↔腾讯地图 · Xiaomi CheckUpdate↔小米广告（market.sdk 为精确组件锚）
+
+**数据卫生两处**：
+1. **Unity Ads 剥离 com.unity3d.player.**——批K 的 PREFIX_MERGES 误把 Unity 引擎命名空间并进广告实体（所有无广告 Unity 游戏会误报 Unity Ads）；脚本 PREFIX_MERGES 行同步回滚（含注释防回归）
+2. **实体名 trim**——' 人脸核身 SDK' 前导空格清除（全库唯一一处）
+
+**合计：aliases 22 → 50**。
+
+**随批归类清洗（第三批合并暴露）**：28 对新组 primary 复检出 11 组 category=other（CN 名/新名未进 categorize regex）——Mobvista→ads；TBS/VirtualApp/VirtualAPK/智齿客服→infra；Flipper→quality；实人认证四名+人脸核身→security；Stripe/TapTap 两名→social_or_pay。regex 两侧同步（+Mobvista/浏览服务|TBS/VirtualApp|Sobot/Flipper/实人认证|人脸|核身/Stripe|TapTap），快照 21 实体归位。primary 复检归零。
