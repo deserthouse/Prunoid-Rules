@@ -2,6 +2,8 @@
 
 > 同一公司下多个规则实体。规则：**自动合并仅限确认同源异名**（跨家分发度≥3 或官方同名变体）；
 > 本清单由脚本生成，人工核对后进 `scripts/build_snapshot.py` 的 ALIAS_MERGES。
+>
+> **✅ 已清账（批T1，2026-10-10）**：95 组全量裁决完毕——10 对合并（aliases 50→60，tag v9）、其余全部"保持独立"并记录理由；交叉比对确认 A/C/G 节已预消费其中 ~15 组。证据包 docs/t1_evidence.txt，判定见 docs/alias_decisions.md H 节。本清单封存，仅作历史索引。
 
 - Agora: Agora RTC SDK, Agora RTC2
 - Alibaba: Ali Account SDK, Ali Mobile Data Analysis, Ali Mobile push, Ali TBAuth, AliNNPython, Alibaba Baichuan Advertising, Alibaba ExtHub, Aliyun DTF Face Verify, Aliyun RealIdentity, Aliyun Short Video Editor, AndFix, DexPatch, FlutterBoost, GCanvas, GaiaX, Kraken, MNN, TanX, Taobao Interaction Channel, Weex, XQUIC, mPaaS, mPaaS 扫一扫, mPaaS 社交分享, 一键登录和本机号码校验, 号码认证服务, 实人认证 SDK, 岳鹰全景监控, 百川电商 SDK - 唤醒手淘, 百川电商 SDK - 授权, 金融级实人认证 SDK, 阿里云短视频 SDK, 阿里云语音服务 SDK（NLSClinet）, 阿里聚安全, 高德地图 SDK

@@ -98,3 +98,33 @@ Adjust SDK→Adjust · Ali TBAuth→Ali Account SDK · 金融级实人认证 SDK
 **合计：aliases 22 → 50**。
 
 **随批归类清洗（第三批合并暴露）**：28 对新组 primary 复检出 11 组 category=other（CN 名/新名未进 categorize regex）——Mobvista→ads；TBS/VirtualApp/VirtualAPK/智齿客服→infra；Flipper→quality；实人认证四名+人脸核身→security；Stripe/TapTap 两名→social_or_pay。regex 两侧同步（+Mobvista/浏览服务|TBS/VirtualApp|Sobot/Flipper/实人认证|人脸|核身/Stripe|TapTap），快照 21 实体归位。primary 复检归零。
+
+## H. 长尾清账（批T1，2026-10-10，backlog 95 组全量裁决，aliases 50 → 60）
+
+> 方法：95 组按族生成 ns3 证据包（同族两两重叠 ≥0.34 提取）+ 跨公司字段双语嫌疑定点核查；
+> 与 A/C/G 节已裁决对交叉比对后，真实新候选 = 共持厂商独占域 ov=1.00 四组 + 零共享域双语名六组。
+
+**合并 10 对**：
+
+| 别名 → 规范名 | 级别 | 证据 |
+|---|---|---|
+| GDT 优量汇 → 腾讯广告 SDK | A | 共持 com.qq.e（ov=1.00，广点通独占域）；GDT=优量汇 新旧品牌，同广告 SDK |
+| Unity Services Ads → Unity Ads | A | 共持 com.unity3d.services（unity-ads artifact 内部实现层，非引擎域——com.unity3d.player 教训已排除） |
+| Audience Network SDK → Audience Network | A | 共持 com.facebook.ads；同产品双写法（Facebook 官方产品名 Audience Network） |
+| 移动应用推广 SDK → Baidu 百青藤 | B | 共持 com.baidu.mobads（百度移动广告联盟独占域）；MAP 应用推广为百青藤能力集 |
+| 七鱼 SDK → NetEase Qiyukf | B | 双语名（网易七鱼 = Qiyukf，官方域 qiyukf.com）；锚点并集（prefix+1 comp） |
+| Umeng Analytics → 移动统计分析 | B | 双语名（友盟+应用统计官方双名）；canonical 随 conf-primary（high） |
+| Baidu Face Recognition → 百度人脸识别 | B | 双语名（百度人脸识别官方双名）；锚点并集 com.baidu.idl.face |
+| Baidu Maps → 百度地图 SDK | B | 双语名；canonical 随 conf-primary |
+| Xiaomi Push → MiPush | B | 双语名（MiPush=小米推送）；锚点互补（com.xiaomi.push.service. ↔ .mipush.sdk.，并集增益） |
+| 网易云通信 SDK → 网易云信 | B | 云信旧品牌（网易云通信与视频 → 网易云信）；24+7 comps 并集 |
+
+**保持独立（全部记录在案，backlog 清账）**：
+- **框架域网状对全数独立**：Google 91 实体族（com.google.android/firebase 框架域，58 对 ov=1.00 全部不合并——同 Amazon com.amazon.device 先例）；Huawei 19 实体族（com.huawei.hms 框架域，57 对同理）；WeChat NFC↔WeChat advertisement（com.tencent.mm 微信本体域）；Tencent Cloud TRTC/LiteAV↔QCloud LogUtils（qcloud 框架域，G 节同判）；Alipay MSP Checkout↔Alipay Mobile SDK（com.alipay.android 框架域 + B44 支付重后果先例）
+- **同公司不同产品/子产品**：FMOD↔FMOD Studio · NetEase 易盾三件（母产品↔子产品，HMS Core↔AAID 先例）· 腾讯灯塔两件 · 讯飞 SDK/AIUI/离线语音合成（母品牌↔具体 SDK）· Unity↔Unity Ads（引擎域先例 B40）· Adjust↔Unbotify · myTarget↔myTracker · AppMetrica↔Yandex Ad · Apsalar↔Singular（收购≠同 SDK，锚点异源）· Millennial↔JumpTap · AppBrain↔YuMe · acoustic↔Tealeaf · adobe 三件（Analytics/Audience Manager/Video 各自产品）· amazon 三件 · AppCenter Analytics↔Crashes（同平台模块）· 快手广告↔快手开放平台 · 极光推送↔极光认证 · 京东两件 · HONOR/HUAWEI/OPPO/Xiaomi 推送↔广告各对（推送 vs 广告，B 节先例）
+- **无共享独占域且无法定案**：其余 ~70 组零 ns3 重叠族（保守合并不成立，逐组见证据包 docs/t1_evidence.txt）
+
+**随批归类清洗 6 实体**：Audience Network / Audience Network SDK（analytics→**ads**，Facebook 广告联盟错类）· 百度人脸识别 ×2（other→**security**，regex 已有"人脸"疑生成期旁路）· 移动应用推广 SDK（other→**ads**，primary 夺位修正）· 七鱼 SDK（other→**infra**，同上）；CAT_RULES 两侧同步（ads + "Audience Network|应用推广"，infra + "Qiyukf|七鱼"）
+
+**primary 复检**：T1 新 10 组全部归位（无 other 夺位）。**存量观察**（不入本批）：全库 primary=other 约 400 组，多为 oF2pks/LibChecker 英文品牌名未进 categorize regex——另立数据卫生项。
+**生效**：aliases 50 → 60；实体集 2003 不动（合并=运行时语义）；规则仓 tag **v9**；主仓 app 内置快照随下个 app 版本出包。
