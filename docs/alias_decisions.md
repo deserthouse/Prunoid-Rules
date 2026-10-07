@@ -128,3 +128,11 @@ Adjust SDK→Adjust · Ali TBAuth→Ali Account SDK · 金融级实人认证 SDK
 
 **primary 复检**：T1 新 10 组全部归位（无 other 夺位）。**存量观察**（不入本批）：全库 primary=other 约 400 组，多为 oF2pks/LibChecker 英文品牌名未进 categorize regex——另立数据卫生项。
 **生效**：aliases 50 → 60；实体集 2003 不动（合并=运行时语义）；规则仓 tag **v9**；主仓 app 内置快照随下个 app 版本出包。
+
+## I. 长尾归类清洗（批T3，2026-10-07，475 实体归位，tag v10）
+
+> 背景：批T1 primary 复检暴露全库 ~400 组 primary=other（oF2pks/LibChecker 英文品牌名未进 categorize regex）。
+> 方法：新增 NAME_CATEGORY_MAP 显式归类表（485 条高置信度名称，公开可查证知医学——**宁缺毋滥，拿不准保持 other**）+ categorize() 兜底查表；1110 个 other 实体重跑现行 CAT_RULES + 表。
+
+**结果**：475 实体归位（infra 186 / ads 104 / analytics 88 / framework 35 / security 17 / quality 16 / maps 14 / social_or_pay 11 / push 4）；primary=other 组 1278 → **279**（余量为 native 库/游戏中间件/冷门长尾——other 是合法归类，不再强推）。
+**同步**：CAT_RULES 未改语义仅增表；主仓 research/build_snapshot.py 存档副本同步；app 内置快照随 0.17.2 出包。
