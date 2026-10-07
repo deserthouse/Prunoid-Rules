@@ -31,7 +31,7 @@ Prunoid App 支持「内置快照 + 多源订阅」：可同时订阅多个规�
 
 > 快照顶层含 `aliases` 字段（别名 → 规范名）：跨语言同名 SDK 运行时合并为单实体；由 build_snapshot.py 维护。
 
-- **固定版本（v1 tag）**：`https://raw.githubusercontent.com/deserthouse/Prunoid-Rules/v1/rules/snapshot.json`
+- **固定版本（v8 tag，当前最新）**：`https://raw.githubusercontent.com/deserthouse/Prunoid-Rules/v8/rules/snapshot.json`（历史固定点 v1~v7 同构永不变更，需可复现旧版时按 tag 取用）
 
 版本策略：快照更新打 `vN` tag，固定 URL 内容永不变更。自建源只要符合[同一 schema](rules/snapshot.json) 即可被订阅。
 
