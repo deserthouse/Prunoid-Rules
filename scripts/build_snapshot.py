@@ -248,3 +248,5 @@ with open(outp, "w", encoding="utf-8") as f:
     json.dump(out, f, ensure_ascii=False, separators=(",", ":"))
 print(f"sdks={len(sdks)} blocker={n_blocker} fuckad={n_fuckad} lcrComp={comp_count} lcrSo={so_count} of2pks={n_of2pks}")
 print(f"size={os.path.getsize(outp)/1024:.0f}KB -> {os.path.relpath(outp, ROOT)}")
+
+# ci-selftest: PR 链路实测触发行（合并前移除）
