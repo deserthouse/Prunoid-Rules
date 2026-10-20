@@ -59,6 +59,9 @@ ALIAS_MERGES = {
     "Aurora Push": "极光推送",
     "Getui SDK": "个推",
     "JiGuang Aurora Mobile JPush": "极光推送",
+    # 批GG-G2（2026-10-21）：百度 mobads 系三实体同族（与 research 主脚本同步）
+    "Baidu Mobile Ads": "Baidu 百青藤",
+    "Baidu Mobile App Promotion": "Baidu 百青藤",
     # 批H（2026-09-26）：判定书 docs/alias_decisions.md，共 14 对
     "Pangle 穿山甲": "Pangle SDK",
     "Pangolin Advertising SDK": "Pangle SDK",
