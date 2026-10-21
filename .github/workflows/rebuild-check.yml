@@ -6,11 +6,19 @@ name: rebuild-check
 on:
   push:
     tags: ["v1[3-9]", "v2*", "v[3-9][0-9]"]
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "被校验的 vN tag（默认最高 vN）"
+        required: false
+        default: ""
 jobs:
   rebuild:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.ref != '' && github.event.inputs.ref || github.ref }}
       - uses: actions/setup-python@v5
         with: { python-version: "3.12" }
       - name: Read pins
@@ -57,3 +65,22 @@ jobs:
           echo "rebuilt      : $(md5sum rebuilt_snapshot.json)"
           cmp rules/snapshot.json rebuilt_snapshot.json
           echo "REBUILD BYTE-IDENTICAL"
+      - name: Diagnose first divergence (on failure)
+        if: failure()
+        run: |
+          python - <<'EOF'
+          a = open("rules/snapshot.json", "rb").read()
+          b = open("rebuilt_snapshot.json", "rb").read()
+          n = min(len(a), len(b))
+          i = next((k for k in range(n) if a[k] != b[k]), n)
+          print(f"lengths: tag={len(a)} rebuilt={len(b)}; first diff at byte {i}")
+          print("tag    :", a[max(0,i-90):i+90])
+          print("rebuilt:", b[max(0,i-90):i+90])
+          raise SystemExit(1 if i != len(b) or len(a) != len(b) else 0)
+          EOF
+      - name: Upload rebuilt snapshot (on failure)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rebuilt-snapshot
+          path: rebuilt_snapshot.json
