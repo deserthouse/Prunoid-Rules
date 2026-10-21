@@ -1,0 +1,59 @@
+name: rebuild-check
+# 批K K4：tag 冻结重建 byte 级门禁（v13 起）。
+# 逻辑：checkout tag → 读 tag 快照的 generatedAt → 按 scripts/upstream_pins.json 固定 ref
+# 取上游输入 → scripts/build_snapshot.py --freeze-at 重建 → 与仓内 snapshot.json md5 比对。
+# v1~v12 历史快照未按本管线生成（README 有声明），不触发本门禁（tag 过滤 v13 起）。
+on:
+  push:
+    tags: ["v1[3-9]", "v2*", "v[3-9][0-9]"]
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: Read pins
+        id: pins
+        run: |
+          echo "lcr=$(python -c "import json;print(json.load(open('scripts/upstream_pins.json'))['lcr']['url'])")" >> "$GITHUB_OUTPUT"
+          echo "lcr_ref=$(python -c "import json;print(json.load(open('scripts/upstream_pins.json'))['lcr']['ref'])")" >> "$GITHUB_OUTPUT"
+          echo "blocker=$(python -c "import json;print(json.load(open('scripts/upstream_pins.json'))['blocker']['url'])")" >> "$GITHUB_OUTPUT"
+          echo "blocker_ref=$(python -c "import json;print(json.load(open('scripts/upstream_pins.json'))['blocker']['ref'])")" >> "$GITHUB_OUTPUT"
+          echo "of2pks=$(python -c "import json;print(json.load(open('scripts/upstream_pins.json'))['of2pks']['url'].rstrip('.git'))")" >> "$GITHUB_OUTPUT"
+          echo "of2pks_ref=$(python -c "import json;print(json.load(open('scripts/upstream_pins.json'))['of2pks']['ref'])")" >> "$GITHUB_OUTPUT"
+          echo "of2pks_file=$(python -c "import json;print(json.load(open('scripts/upstream_pins.json'))['of2pks']['file'])")" >> "$GITHUB_OUTPUT"
+          echo "of2pks_md5=$(python -c "import json;print(json.load(open('scripts/upstream_pins.json'))['of2pks']['contentMd5'])")" >> "$GITHUB_OUTPUT"
+      - name: Fetch pinned upstream inputs
+        env:
+          LCR: ${{ steps.pins.outputs.lcr }}
+          LCR_REF: ${{ steps.pins.outputs.lcr_ref }}
+          BLOCKER: ${{ steps.pins.outputs.blocker }}
+          BLOCKER_REF: ${{ steps.pins.outputs.blocker_ref }}
+          OF2PKS: ${{ steps.pins.outputs.of2pks }}
+          OF2PKS_REF: ${{ steps.pins.outputs.of2pks_ref }}
+          OF2PKS_FILE: ${{ steps.pins.outputs.of2pks_file }}
+          OF2PKS_MD5: ${{ steps.pins.outputs.of2pks_md5 }}
+        run: |
+          git clone --quiet --filter=blob:none --no-checkout "$LCR" upstream_lcr
+          git -C upstream_lcr checkout --quiet "$LCR_REF"
+          git clone --quiet --filter=blob:none --no-checkout "$BLOCKER" upstream_blocker
+          git -C upstream_blocker checkout --quiet "$BLOCKER_REF"
+          mkdir -p upstream_of2pks
+          curl --fail --silent --show-error -L \
+            "$OF2PKS/-/raw/$OF2PKS_REF/$OF2PKS_FILE" -o "upstream_of2pks/$OF2PKS_FILE"
+          echo "$OF2PKS_MD5  upstream_of2pks/$OF2PKS_FILE" | md5sum -c -
+      - name: Rebuild with frozen timestamp and compare bytes
+        run: |
+          FREEZE_AT=$(python -c "import json;print(json.load(open('rules/snapshot.json'))['generatedAt'])")
+          python scripts/build_snapshot.py \
+            --lcr-repo upstream_lcr \
+            --blocker-json upstream_blocker/rules/en/general.json \
+            --of2pks-txt upstream_of2pks/trackers448NEW.txt \
+            --out rebuilt_snapshot.json \
+            --freeze-at "$FREEZE_AT"
+          python scripts/validate_rules.py rebuilt_snapshot.json
+          echo "tag snapshot : $(md5sum rules/snapshot.json)"
+          echo "rebuilt      : $(md5sum rebuilt_snapshot.json)"
+          cmp rules/snapshot.json rebuilt_snapshot.json
+          echo "REBUILD BYTE-IDENTICAL"
