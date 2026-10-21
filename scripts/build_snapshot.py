@@ -16,6 +16,9 @@ v1~v12 由主仓 research/build_snapshot.py 生成（README 历史声明），v1
 
 确定性（批K K2）：--freeze-at 固定 generatedAt；全部 glob 排序+组件终排序——同输入
 同字节，跨平台可复现（v13 起成立；v12 及以前的历史产物含未排序 glob 的平台序，不做回溯）。
+构建环境约束（2026-10-22 实证）：官方构建环境=Linux（CI）。上游 LibChecker-Rules 存在
+大小写碰撞文件（native-libs/libMuPDF.so.json 与 libmupdf.so.json 并存），Windows 大小写
+不敏感文件系统检出只剩其一——Windows 本地构建会少 1 条 native 锚点，不得作为发布来源。
 """
 import argparse
 import glob

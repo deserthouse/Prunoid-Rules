@@ -30,7 +30,7 @@ Prunoid App 支持「内置快照 + 多源订阅」：可同时订阅多个规�
 - **跟随最新 main**：`https://raw.githubusercontent.com/deserthouse/Prunoid-Rules/main/rules/snapshot.json`
 
 > 快照顶层含 `aliases` 字段（别名 → 规范名）：跨语言同名 SDK 运行时合并为单实体；由 build_snapshot.py 维护。
-> **可重建性（批K，2026-10-22 起）**：快照 v13 起由仓内 `scripts/build_snapshot.py` 生成——上游输入按 `scripts/upstream_pins.json` 固定 ref 取用，`--freeze-at` 固定时间戳，CI 在 tag 推送时冻结重建并做 byte 级 md5 比对（`rebuild-check`）。v1~v12 为归一前历史产物，不做回溯重建。
+> **可重建性（批K，2026-10-22 起）**：快照 v13 起由仓内 `scripts/build_snapshot.py` 生成——上游输入按 `scripts/upstream_pins.json` 固定 ref 取用，`--freeze-at` 固定时间戳，CI 在 tag 推送时冻结重建并做 byte 级 md5 比对（`rebuild-check`）。v1~v12 为归一前历史产物，不做回溯重建。官方构建环境=Linux CI（上游存在大小写碰撞的规则文件，Windows 本地构建会少计 native 锚点，不作为发布来源）。
 
 - **固定版本（v13 tag，当前最新）**：`https://raw.githubusercontent.com/deserthouse/Prunoid-Rules/v13/rules/snapshot.json`（历史固定点 v1~v12 同构永不变更，需可复现旧版时按 tag 取用；各版规则数见 [CHANGELOG](CHANGELOG.md)）
 
