@@ -5,7 +5,7 @@
 **Prunoid 的 SDK 识别与安全禁用规则库 —— 开放、可溯源、社区共建**
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
-[![Rules](https://img.shields.io/badge/Rules-1929-green.svg)](#-数据来源与协议)
+[![Rules](https://img.shields.io/badge/Rules-2074-green.svg)](#-数据来源与协议)
 [![CI](https://img.shields.io/github/actions/workflow/status/deserthouse/Prunoid-Rules/ci.yml?style=flat-square)](https://github.com/deserthouse/Prunoid-Rules/actions)
 
 主项目：[Prunoid](https://github.com/deserthouse/Prunoid) · 贡献指南：[CONTRIBUTING.md](CONTRIBUTING.md)
@@ -18,7 +18,7 @@
 
 面向 [Prunoid](https://github.com/deserthouse/Prunoid)（Android SDK 组件审计工具）的开放规则库：识别第三方 app 内嵌的广告 / 统计 / 推送 / 基础设施 SDK，并给出组件级的安全处置建议。
 
-- **1,929 条** SDK 规则，每条携带 `sources[]`（数据出处）与 `confidence`（置信度），合并脚本可复现
+- **2,074 条** SDK 规则，每条携带 `sources[]`（数据出处）与 `confidence`（置信度），合并脚本可复现（数量随快照更新，CI 门禁保证本页与快照一致）
 - **三路识别**：包名前缀 + 组件类名精确锚点 + 组件类名前缀（端侧确定性匹配，不猜测）
 - **处置标注**：`safeToBlock` / `sideEffect` 逐条给出，不预测、不夸大
 - **可选富字段**：`description` / `devTeam` / `sourceLink` / `iconUrl`（品牌图标 URL，贡献者以自有许可提供）——欢迎在 PR 中补全，App 端档案卡会直接呈现并署名 `contributors`
@@ -31,7 +31,7 @@ Prunoid App 支持「内置快照 + 多源订阅」：可同时订阅多个规�
 
 > 快照顶层含 `aliases` 字段（别名 → 规范名）：跨语言同名 SDK 运行时合并为单实体；由 build_snapshot.py 维护。
 
-- **固定版本（v8 tag，当前最新）**：`https://raw.githubusercontent.com/deserthouse/Prunoid-Rules/v8/rules/snapshot.json`（历史固定点 v1~v7 同构永不变更，需可复现旧版时按 tag 取用）
+- **固定版本（v12 tag，当前最新）**：`https://raw.githubusercontent.com/deserthouse/Prunoid-Rules/v12/rules/snapshot.json`（历史固定点 v1~v11 同构永不变更，需可复现旧版时按 tag 取用；各版规则数见 [CHANGELOG](CHANGELOG.md)）
 
 版本策略：快照更新打 `vN` tag，固定 URL 内容永不变更。自建源只要符合[同一 schema](rules/snapshot.json) 即可被订阅。
 
