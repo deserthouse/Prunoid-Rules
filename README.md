@@ -5,7 +5,7 @@
 **Prunoid 的 SDK 识别与安全禁用规则库 —— 开放、可溯源、社区共建**
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
-[![Rules](https://img.shields.io/badge/Rules-2074-green.svg)](#-数据来源与协议)
+[![Rules](https://img.shields.io/badge/Rules-2079-green.svg)](#-数据来源与协议)
 [![CI](https://img.shields.io/github/actions/workflow/status/deserthouse/Prunoid-Rules/ci.yml?style=flat-square)](https://github.com/deserthouse/Prunoid-Rules/actions)
 
 主项目：[Prunoid](https://github.com/deserthouse/Prunoid) · 贡献指南：[CONTRIBUTING.md](CONTRIBUTING.md)

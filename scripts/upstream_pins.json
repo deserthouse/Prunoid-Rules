@@ -9,8 +9,8 @@
   },
   "blocker": {
     "url": "https://github.com/lihenggui/blocker-general-rules.git",
-    "ref": "b30c5d6cd2a07ed7c1f3f245076986de16572491",
-    "pinnedAt": "2026-10-22",
+    "ref": "55ae4b98ea17f6589bc844652f616cfae9195e28",
+    "pinnedAt": "2026-10-24",
     "file": "rules/en/general.json",
     "license": "Apache-2.0",
     "usedAs": "禁用规则正源（safeToBlock/sideEffect/contributors）"
