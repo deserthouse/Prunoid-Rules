@@ -50,7 +50,7 @@ PR 会自动运行 `scripts/validate_rules.py`：
 
 1. 安装 [Prunoid](https://github.com/deserthouse/Prunoid) 扫描设备
 2. 任一应用详情 → 「未识别组件」→ 展开 → 底部「分享组件清单」
-3. 用 **Component report** issue 模板粘贴导出的 JSON
+3. 用 [组件清单表单](https://github.com/deserthouse/Prunoid-Rules/issues/new?template=component-report.yml)粘贴导出的 JSON
 4. 维护者研判后收录（下个快照生效）；清单仅含包名与类名（客观事实），无个人信息
 
 ## 数据治理原则（2026-09-19 起，v2）

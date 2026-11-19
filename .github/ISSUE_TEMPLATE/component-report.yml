@@ -1,7 +1,7 @@
 name: 组件清单提交（Component report）
-about: 从 Prunoid app「分享组件清单」导出的 JSON 贴到这里，供规则研判收录
+description: 从 Prunoid app「分享组件清单」导出的 JSON 贴到这里，供规则研判收录
 title: "[report] "
-labels: component-report
+labels: [component-report]
 body:
   - type: markdown
     attributes:
