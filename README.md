@@ -14,16 +14,28 @@
 
 ## 🔗 订阅使用
 
-Prunoid App 支持「内置快照 + 多源订阅」：可同时订阅多个规则源并发生效（同 `id` 冲突时**置信度高者胜**），官方源如下——
+Prunoid 可以同时使用内置快照和多个订阅源。同一 `id` 出现在多个源时，采用置信度较高的规则。复制下列一个地址添加到订阅。
 
-- **跟随最新 main**：`https://raw.githubusercontent.com/deserthouse/Prunoid-Rules/main/rules/snapshot.json`
+**跟随 main**　订阅地址随官方规则更新。
 
-> 快照顶层含 `aliases` 字段（别名 → 规范名）：跨语言同名 SDK 运行时合并为单实体；由 build_snapshot.py 维护。
-> **可重建性（批K，2026-10-22 起）**：快照 v13 起由仓内 `scripts/build_snapshot.py` 生成——上游输入按 `scripts/upstream_pins.json` 固定 ref 取用，`--freeze-at` 固定时间戳，CI 在 tag 推送时冻结重建并做 byte 级 md5 比对（`rebuild-check`）。v1~v12 为归一前历史产物，不做回溯重建。官方构建环境=Linux CI（上游存在大小写碰撞的规则文件，Windows 本地构建会少计 native 锚点，不作为发布来源）。
+```text
+https://raw.githubusercontent.com/deserthouse/Prunoid-Rules/main/rules/snapshot.json
+```
 
-- **固定版本（v14 tag，当前最新）**：`https://raw.githubusercontent.com/deserthouse/Prunoid-Rules/v14/rules/snapshot.json`（历史固定点 v1~v13 同构永不变更，需可复现旧版时按 tag 取用；各版规则数见 [CHANGELOG](CHANGELOG.md)）
+**固定版本（v14 tag，当前最新）**　需要复核同一批规则时使用这个地址。
 
-版本策略：快照更新打 `vN` tag，固定 URL 内容永不变更。自建源只要符合[同一 schema](rules/snapshot.json) 即可被订阅。
+```text
+https://raw.githubusercontent.com/deserthouse/Prunoid-Rules/v14/rules/snapshot.json
+```
+
+历史 `vN` 地址继续有效。各版本的规则数见[更新日志](CHANGELOG.md)，自建源可沿用[快照结构](rules/snapshot.json)。
+
+<details>
+<summary>快照如何生成与复核</summary>
+
+`aliases` 将跨语言的 SDK 别名映射到规范名。从 v13 起，`scripts/build_snapshot.py` 根据 `scripts/upstream_pins.json` 中的上游修订及 `--freeze-at` 时间戳生成快照。发布 tag 时，Linux CI 执行 `rebuild-check`，以 MD5 核对重建产物。v1 至 v12 保留历史产物。上游有仅大小写不同的文件名，Windows 本地构建可能少计 native 锚点。
+
+</details>
 
 ## 📦 这是什么
 
