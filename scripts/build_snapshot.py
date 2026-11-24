@@ -13,6 +13,9 @@ v1~v12 由主仓 research/build_snapshot.py 生成（README 历史声明），v1
      其文件不复制入库——CI 从上游固定 commit 拉取，pin 见 scripts/upstream_pins.json）
 红线：Exodus ODbL 数据不进快照；GPL/AGPL/无协议源的文件与文案不复制。
 输出：自建 schema JSON，逐条带 sources/confidence，可溯源。
+v15（2026-11-24）：归类正则里的短缩写记号（BLE/IM/FIR 等）改为大小写敏感整词——此前 re.I 下
+  作子串匹配（Dou·ble·Click→地图、AdT·im·ing→基础设施、·Fir·ebase→质量）；名称去首尾空白；
+  scripts/name_descriptions.json 提供项目自撰补充描述（只补空缺，键必须是实际规则名）。
 
 确定性（批K K2）：--freeze-at 固定 generatedAt；全部 glob 排序+组件终排序——同输入
 同字节，跨平台可复现（v13 起成立；v12 及以前的历史产物含未排序 glob 的平台序，不做回溯）。
@@ -49,22 +52,22 @@ FUCKAD_ROOTS = [
 ]
 
 CAT_RULES = [
-    (re.compile(r"广告|Ad[s]? SDK|Ads$|Advertising|Monetization|聚合|联盟广告|穿山甲|优量汇|百青藤|开屏|Pangle|CSJ|GroMore|AdMob|AdColony|Inmobi|IronSource|Vungle|Mintegral|Mbridge|AppLovin|Unity Ads|Sigmob|TopOn|AnyThink|TradPlus|Windmill|AdsWizz|SmartAd|Adform|Adaptive|Mediation|Monetize|Ads Kit|Mobvista|Audience Network|应用推广", re.I), "ads"),
+    (re.compile(r"广告|Ad[s]? SDK|Ads$|Advertising|Monetization|聚合|联盟广告|穿山甲|优量汇|百青藤|开屏|Pangle|(?-i:CSJ)|GroMore|AdMob|AdColony|Inmobi|IronSource|Vungle|Mintegral|Mbridge|AppLovin|Unity Ads|Sigmob|TopOn|AnyThink|TradPlus|Windmill|AdsWizz|SmartAd|Adform|Adaptive|Mediation|Monetize|Ads Kit|Mobvista|Audience Network|应用推广", re.I), "ads"),
     # 2026-09-18 扩充批（UNKNOWN 回填）：词表来源=快照 UNKNOWN/other 桶词频实证（仅品牌名事实）
     (re.compile(r"Appodeal|Fyber|Ligatus|Madvertise|Cauly|Vpon|TapResearch|Chartboost|Smaato|PubMatic|OpenX|AdsNative|AdMix|AdTech|AdNetwork|Yandex Ads|StartApp|AirPush|LeadBolt|AppBrain|Adfurikun|Akamai Ads|MoPub|Flurry Ads|Heyzap|Union Ads|内嵌广告|Reward", re.I), "ads"),
-    (re.compile(r"推送|Push|JPush|极光|个推|Getui|信鸽|XG Push|MiPush|小米推送|HMS Push|FCM|GCM|OneSignal|Pushwoosh|Airship|巴法云|友盟推送|TPush|云推送|MCS", re.I), "push"),
+    (re.compile(r"推送|Push|JPush|极光|个推|Getui|信鸽|XG Push|MiPush|小米推送|HMS Push|(?-i:FCM)|(?-i:GCM)|OneSignal|Pushwoosh|Airship|巴法云|友盟推送|TPush|云推送|(?-i:MCS)", re.I), "push"),
     (re.compile(r"统计|分析|Analytics|Statistics|Tracking|Tracker|Attribution|测量|埋点|AppsFlyer|Adjust|Branch|Kochava|Sensors|神策|GrowingIO|友盟|Umeng|Flurry|Amplitude|Mixpanel|Braze|CleverTap|Localytics|mParticle|Segment|Tealium|Comscore|Nielsen|Appsflyer|数说|TalkingData|热云|Tracking", re.I), "analytics"),
     (re.compile(r"FullStory|Telemetry|Matomo|Piwik|Exponea|Acoustic|Marketing Cloud|Measurement|CleanInsights|Countly|Pendo|Amplitude|Horizon|Datafinder|Audience|Batch|Persona|Gigya|Janrain|Kinesis|Plausible|Fathom|Woopra|Kissmetrics|Mouseflow|Smartlook|Trace", re.I), "analytics"),
-    (re.compile(r"崩溃|Crash|性能|Performance|APM|监控|Monitoring|Bugly|Crashlytics|Sentry|Fresco|FIR|Bugtags|Instabug|xCrash|Matrix|APM|Flipper", re.I), "quality"),
+    (re.compile(r"崩溃|Crash|性能|Performance|(?-i:APM)|监控|Monitoring|Bugly|Crashlytics|Sentry|Fresco|(?-i:FIR)|Bugtags|Instabug|xCrash|Matrix|(?-i:APM)|Flipper", re.I), "quality"),
     (re.compile(r"Dynatrace|Loggly|Splunk|Datadog|NewRelic|New Relic|AppDynamics|Raygun|Rollbar|TrackJS|Uptime", re.I), "quality"),
     (re.compile(r"登录|分享|Share|Login|Account|OAuth|支付|Pay|微信|微博|QQ互联|新浪|支付宝|银联|OneTap|Auth|Stripe|TapTap|TapSDK", re.I), "social_or_pay"),
-    (re.compile(r"地图|Location|定位|Map|BaiduMap|AMap|高德|腾讯地图|Geofence|Beacon|蓝牙|BLE|NFC|Wi-Fi 扫描", re.I), "maps"),
+    (re.compile(r"地图|Location|定位|Map|BaiduMap|AMap|高德|腾讯地图|Geofence|Beacon|蓝牙|(?-i:BLE)|(?-i:NFC)|Wi-Fi 扫描", re.I), "maps"),
     (re.compile(r"HyperTrack|Radario|GeoUniq|PathSense|Pilgrim", re.I), "maps"),
-    (re.compile(r"云|存储|Storage|数据库|Database|下载|Download|Update|升级|热修|Hotfix|Sophix|Tinker|Robust|网络|Network|OkHttp|Retrofit|Volley|Cronet|加速|CDN|直播|Live|播放器|Player|RTC|IM|推送通道|WebView|Chaquopy|Python|浏览服务|TBS|VirtualApp|VirtualAPK|Sobot|智齿|Qiyukf|七鱼", re.I), "infra"),
+    (re.compile(r"云|存储|Storage|数据库|Database|下载|Download|Update|升级|热修|Hotfix|Sophix|Tinker|Robust|网络|Network|OkHttp|Retrofit|Volley|Cronet|加速|(?-i:CDN)|直播|Live|播放器|Player|(?-i:RTC)|(?-i:IM)|推送通道|WebView|Chaquopy|Python|浏览服务|(?-i:TBS)|VirtualApp|VirtualAPK|Sobot|智齿|Qiyukf|七鱼", re.I), "infra"),
     (re.compile(r"ZXing|SQLite|MMKV|Fcitx|ReLinker|Glide|Coil|Picasso|Lottie|ExoPlayer|FFmpeg|Zip|Brotli|Zstd|WebP|SVG|Pdf|Barcode|Scanner|Camera|Image|Crop|Compress|Archiver|Native|Cpp|Java|Kotlin", re.I), "infra"),
     (re.compile(r"安全|风控|Security|Risk|反作弊|Anti-|加固|Bangcle|360加固|梆梆|爱加密|Verify|Device ID|设备指纹|Fingerprint|Shumei|数美|同盾|TongDun|Reinforcement|Shield|Guard|Protect|实人认证|人脸|核身|RealIdentity|Face Verify", re.I), "security"),
     (re.compile(r"androidx|Jetpack|Kotlin|Coroutines|Google Play|Play Services|Guava|gRPC|Protobuf|Firebase(?! Analytics)|WorkManager|Room|Compose|Lifecycle|Startup|Profile|HMS Core", re.I), "framework"),
-    (re.compile(r"React Native|Flutter|Expo|Xamarin|Capacitor|Cordova|Ionic|Unity Engine|Unreal|Cocos|Godot|Defold|Mono|IL2CPP|DotNet|MAUI", re.I), "framework"),
+    (re.compile(r"React Native|Flutter|Expo|Xamarin|Capacitor|Cordova|Ionic|Unity Engine|Unreal|Cocos|Godot|Defold|(?-i:Mono)|IL2CPP|DotNet|MAUI", re.I), "framework"),
 ]
 
 # 批R5/H：跨语言别名 → 规范名（运行时 RuleDedup 消费，保守合并锚点并集；
@@ -139,6 +142,10 @@ ALIAS_MERGES = {
     "Baidu Maps": "百度地图 SDK",
     "Xiaomi Push": "MiPush",
     "网易云通信 SDK": "网易云信",
+    # v15（2026-11-24）：前缀同域实证，判定书 docs/alias_decisions.md J 节
+    "Tencent Advertising": "腾讯广告 SDK",
+    "UBiX Ads": "Ubix SSP",
+    "Octopus Ad": "Octopus Ads",
 }
 NAME_CATEGORY_MAP = {
     # 批DD（2026-10-20，LCR 2026-10-16 增量 71 实体归类）
@@ -350,6 +357,22 @@ NAME_CATEGORY_MAP = {
     "Krisp AI 语音 SDK": "infra", "speechEngine": "infra", "vad": "infra",
     "Vosk": "infra", "文字识别服务": "infra", "Leptonica": "infra",
     "Tesseract": "infra",
+
+    # ── v15（2026-11-24）：短缩写记号改大小写敏感整词后的归位（27 项差异逐条人工核对）
+    #    + 样本应用命中条目的显式归类 ──
+    "AdTiming": "ads", "Alimama (formerly AdsMogo)": "ads",
+    "Apptimize": "analytics", "Optimizely": "analytics",
+    "DartCV": "infra", "Rime Core": "infra", "assimp": "infra", "dex2oat optimizer": "infra",
+    "imebra": "infra", "onnxruntime": "infra",
+    "ApngDrawable": "infra", "android-gif-drawable": "infra",
+    "Estimote": "maps", "Gimbal": "maps", "Proximi.io": "maps", "Roximity": "maps", "Blesh": "maps",
+    "Qimei SDK": "security",
+    "Google DoubleClick": "ads", "SuperSonic game advertisement": "ads",
+    "Baidu APPX": "ads", "Tencent MobWin": "ads", "JD CPS Alliance SDK": "ads",
+    "Huawei Mobile Services (HMS) Core": "framework",
+    "Huawei Mobile Services (HMS) Core Library": "framework",
+    "Tencent Browser Service (X5 Kernel)": "infra",
+    "抖音 SDK": "social_or_pay", "ByteDance Sonic": "infra",
 }
 
 def categorize(name):
@@ -375,7 +398,8 @@ def put(key, name, company, cat, prefixes, safe, side, sources, confidence, cont
     if r is None:
         sdks[key] = {
             "id": hashlib.md5(key.encode()).hexdigest()[:12],
-            "name": name, "company": company, "category": cat,
+            # v15：名称去首尾空白——上游标签曾带前导空格（" 人脸核身 SDK"），别名表因此匹配不上
+            "name": name.strip(), "company": company, "category": cat,
             "packPrefixes": sorted(set(prefixes)),
             "safeToBlock": safe, "sideEffect": side or "",
             "sources": sources, "confidence": confidence,
@@ -629,7 +653,7 @@ def build(lcr, blocker_json, of2pks_txt, freeze_at, generator):
 
     # 既有规则前缀并入（K3 归类确认项：族匹配 + 人工定性）
     # K5b：缺失描述补全（2026-09-20，口径=官方文档中性描述；联网+知识研判，来源标注）
-    NAME_DESCRIPTIONS = {'Alipay Mobile SDK': '蚂蚁集团支付宝移动支付 SDK，提供收单、支付回调与钱包能力。', 'Ant mPaaS Container': '蚂蚁集团 mPaaS 移动开发平台容器（H5/小程序容器 mriver 与 ariver 引擎）。', 'Aurora Push': '和极光推送（JPush），提供 App 消息推送通道与厂商通道整合。', 'AutoNavi / Amap': '高德地图开放平台定位/地图 SDK。', 'Baidu Face Recognition': '百度智能云人脸识别离线 SDK（采集、活体、比对）。', 'CCB NetPay': '中国建设银行手机支付 SDK（龙卡支付组件）。', 'CJ Mobile Ad': 'CJ Mobile 广告联盟组件（样本审计收录，归属待厂商确认）。', 'DCloud uni-app Container': 'DCloud uni-app 跨端框架运行时与原生插件桥。', 'Douyin Live Lite': '抖音开放平台直播分享轻量组件（字节跳动）。', 'Douyin Pay': '抖音支付组件（字节跳动）。', 'GalleryFinal': '开源相册/拍照选择库 GalleryFinal（finalteam）。', 'Getui SDK': '个推消息推送 SDK（合并主流厂商通道）。', 'Google Play Billing': 'Google Play 应用内购买结算库。', 'HMS Core Ads SDK': '华为移动服务广告标识与广告能力组件（OAID 等）。', 'Honor Ad Alliance': '荣耀广告联盟（HiAds）组件。', 'Hxad Ad': 'Hxad 广告联盟组件（样本审计收录，归属待厂商确认）。', 'JD CPS Alliance SDK': '京东开普勒 CPS 分销联盟组件（京东商品导购）。', 'JY Ad': 'JY 广告组件（样本审计收录，低置信）。', 'Kuaishou Advertising Alliance': '快手磁力引擎广告联盟（开屏/信息流变现）。', 'Mcto SSP': 'Mcto SSP 广告供给方组件（样本审计收录，低置信）。', 'Meishu Ad': '美数广告平台 SDK（程序化广告）。', 'Mercury Ad': 'Mercury 广告组件（样本审计收录，低置信）。', 'Octopus Ad': '章鱼广告组件（样本审计收录，低置信）。', 'Oppo Advertising Alliance': 'OPPO 互联网广告组件（广告标识与联盟）。', 'PTG Ad': 'PTG 广告 SDK（支持 TopOn 聚合适配，含下载服务）。', 'Pangle': '字节跳动穿山甲 GroMore/Pangle 国际版广告组件。', 'Pangolin Advertising SDK': '字节跳动穿山甲广告 SDK（开屏/激励视频/信息流；含内部渲染子包 com.byazt）。', 'Qingyun Ad': '青云广告 SDK（qyzss.com，低置信）。', 'Qumeng 趣盟': '趣盟聚合广告组件（Fuck.AD 提取事实收录）。', 'Sigmob': 'Sigmob 移动广告聚合平台 SDK（创智汇聚）。', 'SmartDigi Ad': 'SmartDigi（智玛）程序化广告 SDK。', 'Tencent Bugly': '腾讯 Bugly 崩溃分析与异常上报 SDK。', 'Tencent Cloud TRTC/LiteAV': '腾讯云实时音视频 TRTC / 短视频 LiteAV 组件。', 'Tencent Face Verification (Huiyan)': '腾讯云慧眼人脸核身 SDK（实名认证）。', 'Tencent RMonitor APM': '腾讯 RMonitor 性能监控组件。', 'Tencent SHLogin': '腾讯一键登录/本机号码认证组件。', 'Tencent Tinker hot update': '腾讯 Tinker 热修复框架（补丁下发与加载）。', 'TopOn SDK': 'TopOn（塔酷）广告聚合中介平台 SDK，统一调度多家广告网络。', 'Ubix SSP': 'Ubix 广告供给方平台 SDK。', 'Vivo Advertising Alliance': 'vivo 广告联盟组件。', 'Windmill 风车': 'WindMill 风车聚合广告组件（Fuck.AD 提取事实收录）。', 'Xiaomi Mobile Ads Alliance (Mimo Ad SDK)': '小米米盟广告 SDK。', 'Zongliang Ad': '纵量广告 SDK（开屏广告，docs.adprod.cn）。', 'HMS Core': '华为移动服务核心库（推送/账号/广告标识等基础能力）。'}
+    NAME_DESCRIPTIONS = {'Alipay Mobile SDK': '蚂蚁集团支付宝移动支付 SDK，提供收单、支付回调与钱包能力。', 'Ant mPaaS Container': '蚂蚁集团 mPaaS 移动开发平台容器（H5/小程序容器 mriver 与 ariver 引擎）。', 'Aurora Push': '极光推送（JPush）：App 消息推送 SDK，整合各厂商通道。', 'AutoNavi / Amap': '高德地图开放平台定位/地图 SDK。', 'Baidu Face Recognition': '百度智能云人脸识别离线 SDK（采集、活体、比对）。', 'CCB NetPay': '中国建设银行手机支付 SDK（龙卡支付组件）。', 'CJ Mobile Ad': 'CJ Mobile 广告联盟组件（样本审计收录，归属待厂商确认）。', 'DCloud uni-app Container': 'DCloud uni-app 跨端框架运行时与原生插件桥。', 'Douyin Live Lite': '抖音开放平台直播分享轻量组件（字节跳动）。', 'Douyin Pay': '抖音支付组件（字节跳动）。', 'GalleryFinal': '开源相册/拍照选择库 GalleryFinal（finalteam）。', 'Getui SDK': '个推消息推送 SDK（合并主流厂商通道）。', 'Google Play Billing': 'Google Play 应用内购买结算库。', 'HMS Core Ads SDK': '华为移动服务广告标识与广告能力组件（OAID 等）。', 'Honor Ad Alliance': '荣耀广告联盟（HiAds）组件。', 'Hxad Ad': 'Hxad 广告联盟组件（样本审计收录，归属待厂商确认）。', 'JD CPS Alliance SDK': '京东开普勒 CPS 分销联盟组件（京东商品导购）。', 'JY Ad': 'JY 广告组件（样本审计收录，低置信）。', 'Kuaishou Advertising Alliance': '快手磁力引擎广告联盟（开屏/信息流变现）。', 'Mcto SSP': 'Mcto SSP 广告供给方组件（样本审计收录，低置信）。', 'Meishu Ad': '美数广告平台 SDK（程序化广告）。', 'Mercury Ad': 'Mercury 广告组件（样本审计收录，低置信）。', 'Octopus Ad': '章鱼广告组件（样本审计收录，低置信）。', 'Oppo Advertising Alliance': 'OPPO 互联网广告组件（广告标识与联盟）。', 'PTG Ad': 'PTG 广告 SDK（支持 TopOn 聚合适配，含下载服务）。', 'Pangle': '字节跳动穿山甲 GroMore/Pangle 国际版广告组件。', 'Pangolin Advertising SDK': '字节跳动穿山甲广告 SDK（开屏/激励视频/信息流；含内部渲染子包 com.byazt）。', 'Qingyun Ad': '青云广告 SDK（qyzss.com，低置信）。', 'Qumeng 趣盟': '趣盟聚合广告组件（Fuck.AD 提取事实收录）。', 'Sigmob': 'Sigmob 移动广告聚合平台 SDK（创智汇聚）。', 'SmartDigi Ad': 'SmartDigi（智玛）程序化广告 SDK。', 'Tencent Bugly': '腾讯 Bugly 崩溃分析与异常上报 SDK。', 'Tencent Cloud TRTC/LiteAV': '腾讯云实时音视频 TRTC / 短视频 LiteAV 组件。', 'Tencent Face Verification (Huiyan)': '腾讯云慧眼人脸核身 SDK（实名认证）。', 'Tencent RMonitor APM': '腾讯 RMonitor 性能监控组件。', 'Tencent SHLogin': '腾讯一键登录/本机号码认证组件。', 'Tencent Tinker hot update': '腾讯 Tinker 热修复框架（补丁下发与加载）。', 'TopOn SDK': 'TopOn（塔酷）广告聚合中介平台 SDK，统一调度多家广告网络。', 'Ubix SSP': 'Ubix 广告供给方平台 SDK。', 'Vivo Advertising Alliance': 'vivo 广告联盟组件。', 'Windmill 风车': 'WindMill 风车聚合广告组件（Fuck.AD 提取事实收录）。', 'Xiaomi Mobile Ads Alliance (Mimo Ad SDK)': '小米米盟广告 SDK。', 'Zongliang Ad': '纵量广告 SDK（开屏广告，docs.adprod.cn）。', 'HMS Core': '华为移动服务核心库（推送/账号/广告标识等基础能力）。'}
 
     for _r in sdks.values():
         d = NAME_DESCRIPTIONS.get(_r["name"])
@@ -644,6 +668,27 @@ def build(lcr, blocker_json, of2pks_txt, freeze_at, generator):
             "组件前缀 com.wangmai.insightvision；authorities 特征 lywmLifecycleProvider/lywmfileprovider"
             "（宿主包名前缀拼接）；反作弊 so liblywmAliAgainstId.so。"
         )
+
+    # v15：上游描述去首尾空白（LCR 有 4 条带尾随空白；校验器按硬错误处理）
+    for _r in sdks.values():
+        if isinstance(_r.get("description"), str):
+            _r["description"] = _r["description"].strip()
+
+    # ── v15：项目自撰补充描述（scripts/name_descriptions.json，只补空缺；键必须是实际规则名）──
+    _here = os.path.dirname(os.path.abspath(__file__))
+    with open(os.path.join(_here, "name_descriptions.json"), encoding="utf-8") as _f:
+        _extra = {k: v for k, v in json.load(_f).items() if not k.startswith("_")}
+    _names = {_r["name"] for _r in sdks.values()}
+    _unknown = sorted(k for k in _extra if k not in _names)
+    if _unknown:
+        raise SystemExit("name_descriptions.json: %d 个键不是规则名: %s" % (len(_unknown), _unknown[:12]))
+    n_extra = 0
+    for _r in sdks.values():
+        if not _r.get("description"):
+            _d = _extra.get(_r["name"])
+            if _d:
+                _r["description"] = _d
+                n_extra += 1
 
     # G2③（2026-10-21）：byted.live.lite 组件归位——LCR Pangle SDK 规则错挂抖音直播 lite 的
     # ServerManager provider（byted.live.lite 前缀应归 Douyin Live Lite 实体），组件级重定向
@@ -724,7 +769,8 @@ def main():
         json.dump(out, f, ensure_ascii=False, separators=(",", ":"))
     s = out["stats"]
     print(f"sdks={s['sdks']} blocker={s['blocker']} fuckad={s['fuckad']} sampleAudit={s['sampleAudit']} "
-          f"lcrComp={s['lcrComponents']} lcrSo={s['lcrSo']} of2pks={s['of2pks']} enriched={enriched}")
+          f"lcrComp={s['lcrComponents']} lcrSo={s['lcrSo']} of2pks={s['of2pks']} enriched={enriched} "
+          f"descriptions={sum(1 for r in out['sdks'] if r.get('description'))}")
     print(f"size={os.path.getsize(a.out)/1024:.0f}KB -> {a.out}")
 
 

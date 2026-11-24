@@ -136,3 +136,16 @@ Adjust SDK→Adjust · Ali TBAuth→Ali Account SDK · 金融级实人认证 SDK
 
 **结果**：475 实体归位（infra 186 / ads 104 / analytics 88 / framework 35 / security 17 / quality 16 / maps 14 / social_or_pay 11 / push 4）；primary=other 组 1278 → **279**（余量为 native 库/游戏中间件/冷门长尾——other 是合法归类，不再强推）。
 **同步**：CAT_RULES 未改语义仅增表；主仓 research/build_snapshot.py 存档副本同步；app 内置快照随 0.17.2 出包。
+
+## J. v15 数据卫生批别名（2026-11-24，tag v15）
+
+> 方法与 H/T1 同口径：只有前缀同域（一方包名是另一方的前缀扩展）才合并；同公司不同产品一律保持独立。
+> 同批修正：上游 LCR 标签 " 人脸核身 SDK" 带前导空格，H 节的既有别名一直匹配不上——构建脚本现统一去首尾空白，该实体自此并入腾讯云慧眼。
+
+| 别名 → 规范名 | 级别 | 证据 |
+|---|---|---|
+| Tencent Advertising → 腾讯广告 SDK | A | 前缀 com.qq.e. 包含 GDT 优量汇 的 com.qq.e.ads（同 GDT→腾讯广告 SDK 判定）；blocker 侧英文名，另含 com.tencent.klevin.ads、com.tencent.qqmini.ad 两个腾讯广告域 |
+| UBiX Ads → Ubix SSP | A | 前缀 com.ubix.ssp. 同域；blocker 英文名与样本审计条目指同一 SDK |
+| Octopus Ad → Octopus Ads | A | 前缀 com.octopus.ad 同域；规范名取高置信一方（blocker high），低置信样本审计条目并入 |
+
+**保持独立**：Rongyun push（io.rong.push，推送通道）↔ 融云 IM SDK（IM 能力，"同公司不同产品"先例）；WeChat advertisement / WeChat Location / WeChat NFC（微信本体域，H 节判定不变）。

@@ -1,0 +1,64 @@
+name: build-snapshot
+# v15 起的数据批出包通道：在 Linux（官方构建环境）按 scripts/upstream_pins.json 的固定点
+# 重建快照并上传为 artifact。Windows 检出受上游大小写碰撞文件影响会少计 1 条 native 锚点，
+# 本地产物不得作为发布来源。产物取回后提交到 rules/snapshot.json；发布 tag 时仍由
+# rebuild-check 做 byte 级复核（本工作流不替代它）。
+on:
+  workflow_dispatch:
+    inputs:
+      freeze_at:
+        description: "generatedAt（ISO 8601，如 2026-11-25T00:00:00）"
+        required: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: Read pins
+        id: pins
+        run: |
+          echo "lcr=$(python -c "import json;print(json.load(open('scripts/upstream_pins.json'))['lcr']['url'])")" >> "$GITHUB_OUTPUT"
+          echo "lcr_ref=$(python -c "import json;print(json.load(open('scripts/upstream_pins.json'))['lcr']['ref'])")" >> "$GITHUB_OUTPUT"
+          echo "blocker=$(python -c "import json;print(json.load(open('scripts/upstream_pins.json'))['blocker']['url'])")" >> "$GITHUB_OUTPUT"
+          echo "blocker_ref=$(python -c "import json;print(json.load(open('scripts/upstream_pins.json'))['blocker']['ref'])")" >> "$GITHUB_OUTPUT"
+          echo "of2pks=$(python -c "import json;print(json.load(open('scripts/upstream_pins.json'))['of2pks']['url'].rstrip('.git'))")" >> "$GITHUB_OUTPUT"
+          echo "of2pks_ref=$(python -c "import json;print(json.load(open('scripts/upstream_pins.json'))['of2pks']['ref'])")" >> "$GITHUB_OUTPUT"
+          echo "of2pks_file=$(python -c "import json;print(json.load(open('scripts/upstream_pins.json'))['of2pks']['file'])")" >> "$GITHUB_OUTPUT"
+          echo "of2pks_md5=$(python -c "import json;print(json.load(open('scripts/upstream_pins.json'))['of2pks']['contentMd5'])")" >> "$GITHUB_OUTPUT"
+      - name: Fetch pinned upstream inputs
+        env:
+          LCR: ${{ steps.pins.outputs.lcr }}
+          LCR_REF: ${{ steps.pins.outputs.lcr_ref }}
+          BLOCKER: ${{ steps.pins.outputs.blocker }}
+          BLOCKER_REF: ${{ steps.pins.outputs.blocker_ref }}
+          OF2PKS: ${{ steps.pins.outputs.of2pks }}
+          OF2PKS_REF: ${{ steps.pins.outputs.of2pks_ref }}
+          OF2PKS_FILE: ${{ steps.pins.outputs.of2pks_file }}
+          OF2PKS_MD5: ${{ steps.pins.outputs.of2pks_md5 }}
+        run: |
+          git clone --quiet --filter=blob:none --no-checkout "$LCR" upstream_lcr
+          git -C upstream_lcr checkout --quiet "$LCR_REF"
+          git clone --quiet --filter=blob:none --no-checkout "$BLOCKER" upstream_blocker
+          git -C upstream_blocker checkout --quiet "$BLOCKER_REF"
+          mkdir -p upstream_of2pks
+          curl --fail --silent --show-error -L \
+            "$OF2PKS/-/raw/$OF2PKS_REF/$OF2PKS_FILE" -o "upstream_of2pks/$OF2PKS_FILE"
+          echo "$OF2PKS_MD5  upstream_of2pks/$OF2PKS_FILE" | md5sum -c -
+      - name: Build with frozen timestamp
+        run: |
+          python scripts/build_snapshot.py \
+            --lcr-repo upstream_lcr \
+            --blocker-json upstream_blocker/rules/en/general.json \
+            --of2pks-txt upstream_of2pks/trackers448NEW.txt \
+            --out snapshot.json \
+            --freeze-at "${{ inputs.freeze_at }}"
+          python scripts/validate_rules.py snapshot.json
+          echo "built snapshot: $(md5sum snapshot.json)"
+      - name: Upload snapshot
+        uses: actions/upload-artifact@v4
+        with:
+          name: snapshot
+          path: snapshot.json
+          if-no-files-found: error
