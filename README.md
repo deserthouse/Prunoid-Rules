@@ -22,10 +22,10 @@ Prunoid 可以同时使用内置快照和多个订阅源。同一 `id` 出现在
 https://raw.githubusercontent.com/deserthouse/Prunoid-Rules/main/rules/snapshot.json
 ```
 
-**固定版本（v14 tag，当前最新）**　需要复核同一批规则时使用这个地址。
+**固定版本（v15 tag，当前最新）**　需要复核同一批规则时使用这个地址。
 
 ```text
-https://raw.githubusercontent.com/deserthouse/Prunoid-Rules/v14/rules/snapshot.json
+https://raw.githubusercontent.com/deserthouse/Prunoid-Rules/v15/rules/snapshot.json
 ```
 
 历史 `vN` 地址继续有效。各版本的规则数见[更新日志](CHANGELOG.md)，自建源可沿用[快照结构](rules/snapshot.json)。
@@ -33,7 +33,7 @@ https://raw.githubusercontent.com/deserthouse/Prunoid-Rules/v14/rules/snapshot.j
 <details>
 <summary>快照如何生成与复核</summary>
 
-`aliases` 将跨语言的 SDK 别名映射到规范名。从 v13 起，`scripts/build_snapshot.py` 根据 `scripts/upstream_pins.json` 中的上游修订及 `--freeze-at` 时间戳生成快照。发布 tag 时，Linux CI 执行 `rebuild-check`，以 MD5 核对重建产物。v1 至 v12 保留历史产物。上游有仅大小写不同的文件名，Windows 本地构建可能少计 native 锚点。
+`aliases` 将跨语言的 SDK 别名映射到规范名。`scripts/name_descriptions.json` 收录项目自撰的补充描述，只填补上游没有的空缺。从 v13 起，`scripts/build_snapshot.py` 根据 `scripts/upstream_pins.json` 中的上游修订及 `--freeze-at` 时间戳生成快照。发布 tag 时，Linux CI 执行 `rebuild-check`，以 MD5 核对重建产物。v1 至 v12 保留历史产物。上游有仅大小写不同的文件名，Windows 本地构建可能少计 native 锚点。
 
 </details>
 
@@ -50,15 +50,15 @@ https://raw.githubusercontent.com/deserthouse/Prunoid-Rules/v14/rules/snapshot.j
 
 每个 PR 自动执行 [`scripts/validate_rules.py`](scripts/validate_rules.py)：
 
-- **硬错误**（阻断合并）：schema 校验、`id` 重复、`sources` 为空、枚举字段非法
+- **硬错误**（阻断合并）：schema 校验、`id` 重复、`sources` 为空、枚举字段非法、名称/包名前缀/描述带首尾空白
 - **警告**（不阻断）：同名重复规则（多源对同一 SDK 各持一条属合法形态，但会造成图标/描述映射歧义，提示去重）
 
 ## 📊 数据来源与协议
 
 | 来源 | 协议 | 用法 |
 |---|---|---|
-| [LibChecker-Rules](https://github.com/LibChecker/LibChecker-Rules) | Apache-2.0 | 组件识别锚点（1,133 组件 + 1,406 native） |
-| [blocker-general-rules](https://github.com/lihenggui/blocker-general-rules) | Apache-2.0 | SDK 禁用规则（468 条，含 safeToBlock/sideEffect） |
+| [LibChecker-Rules](https://github.com/LibChecker/LibChecker-Rules) | Apache-2.0 | 组件识别锚点（1,199 组件 + 1,548 native） |
+| [blocker-general-rules](https://github.com/lihenggui/blocker-general-rules) | Apache-2.0 | SDK 禁用规则（473 条，含 safeToBlock/sideEffect） |
 | oF2pks / 3xodusprivacy-toolbox | 无声明（仅事实字段） | 包名前缀补充（619 条，低置信度标注） |
 | Fuck.AD dex 提取 | 客观事实 | 聚合广告 SDK 根包名（16 家） |
 | 实机 APK 分析 | 一手数据 | 置信度最高 |

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""规则快照校验：schema/枚举/id 唯一性/sources 必填。CI 与本地共用。"""
+"""规则快照校验：schema/枚举/id 唯一性/sources 必填/名称与前缀无首尾空白。CI 与本地共用。"""
 import json, sys, re
 
 CATEGORIES = {"ads","push","analytics","quality","social_or_pay","maps","infra","security","framework","other"}
@@ -26,6 +26,16 @@ def main(path):
         if r.get("category") not in CATEGORIES: errs.append(f"[{rid}] bad category {r.get('category')}")
         if r.get("confidence") not in CONF: errs.append(f"[{rid}] bad confidence {r.get('confidence')}")
         if not isinstance(r.get("safeToBlock"), bool): errs.append(f"[{rid}] safeToBlock not bool")
+        # v15：名称/前缀/描述不得有首尾空白或控制字符——上游标签曾带前导空格
+        # （" 人脸核身 SDK"），别名表因此匹配不上，实体一直没并入规范名
+        if nm != nm.strip() or "  " in nm or re.search(r"[\u3000\x00-\x1f]", nm):
+            errs.append(f"[{rid}] name has stray whitespace: {nm!r}")
+        for pfx in r.get("packPrefixes", []):
+            if not isinstance(pfx, str) or not pfx or pfx != pfx.strip() or " " in pfx:
+                errs.append(f"[{rid}] bad packPrefix {pfx!r}")
+        desc = r.get("description", "")
+        if not isinstance(desc, str) or desc != desc.strip():
+            errs.append(f"[{rid}] description has stray whitespace")
         for c in r.get("components", []):
             if c.get("type") not in TYPES: errs.append(f"[{rid}] bad component type {c.get('type')}")
             if not c.get("class"): errs.append(f"[{rid}] component missing class")
