@@ -2,15 +2,15 @@
   "_comment": "上游输入固定点（批K K1）：重建 v13+ 快照必须 checkout 以下 ref——上游演进后由数据批更新 pin 并出新一轮 vN tag；v1~v12 的生成输入以主仓 research/ 克隆历史为准，不在此列",
   "lcr": {
     "url": "https://github.com/LibChecker/LibChecker-Rules.git",
-    "ref": "51eb7344e0986925dc175e4e250a0bb6d0bb3351",
-    "pinnedAt": "2026-10-22",
+    "ref": "7815d0c1d1a96c2568ac603c5381314afcc87bac",
+    "pinnedAt": "2026-11-28",
     "license": "Apache-2.0",
     "usedAs": "组件识别锚点骨架（四类组件+native so+富描述）"
   },
   "blocker": {
     "url": "https://github.com/lihenggui/blocker-general-rules.git",
-    "ref": "55ae4b98ea17f6589bc844652f616cfae9195e28",
-    "pinnedAt": "2026-10-24",
+    "ref": "312d42be4fef8b769ddd52b47fdf8461c4334e4d",
+    "pinnedAt": "2026-11-28",
     "file": "rules/en/general.json",
     "license": "Apache-2.0",
     "usedAs": "禁用规则正源（safeToBlock/sideEffect/contributors）"

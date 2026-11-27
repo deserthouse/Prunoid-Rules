@@ -16,6 +16,10 @@ v1~v12 由主仓 research/build_snapshot.py 生成（README 历史声明），v1
 v15（2026-11-24）：归类正则里的短缩写记号（BLE/IM/FIR 等）改为大小写敏感整词——此前 re.I 下
   作子串匹配（Dou·ble·Click→地图、AdT·im·ing→基础设施、·Fir·ebase→质量）；名称去首尾空白；
   scripts/name_descriptions.json 提供项目自撰补充描述（只补空缺，键必须是实际规则名）。
+v16（2026-11-28）：上游同步批（LibChecker-Rules 7815d0c、blocker-general-rules 312d42b）。新增 24 个实体的
+显式归类（境外营销/推送平台关键词表不敏感）；NAME_CATEGORY_OVERRIDE 先于正则生效，只放正则会误判的名字；
+PREFIX_REMOVALS 剔除与既有实体重叠的宽前缀（穿山甲 com.byted.live. ↔ 抖音直播 Lite，判定书 K 节）；
+LCR 来源标签去掉过时的“v44”（固定点早已不是 v44，版本以 upstream_pins.json 为准）。
 
 确定性（批K K2）：--freeze-at 固定 generatedAt；全部 glob 排序+组件终排序——同输入
 同字节，跨平台可复现（v13 起成立；v12 及以前的历史产物含未排序 glob 的平台序，不做回溯）。
@@ -146,8 +150,24 @@ ALIAS_MERGES = {
     "Tencent Advertising": "腾讯广告 SDK",
     "UBiX Ads": "Ubix SSP",
     "Octopus Ad": "Octopus Ads",
+    # v16（2026-11-28）：同一个 SDK 的大小写变体（blocker 新增 BIGO Ads，样本审计条目为 Bigo Ads，前缀同为 sg.bigo.ads）
+    "BIGO Ads": "Bigo Ads",
 }
+# v16（2026-11-28）：先于正则生效的显式归类——只放正则会误判的名字
+NAME_CATEGORY_OVERRIDE = {
+    "Mapp Engage (Appoxee)": "push",   # 营销推送 SDK；正则 Map 把 "Mapp" 当成地图
+}
+
 NAME_CATEGORY_MAP = {
+    # v16（2026-11-28，上游同步新增实体：关键词表对境外营销/推送类平台不敏感）
+    "Contentsquare": "analytics", "Metrix": "analytics", "Cooee": "analytics", "Neura": "analytics",
+    "Infobip Mobile Messaging": "push", "Indigitall": "push", "Cordial": "push", "NotifyVisitors": "push",
+    "Donky": "push", "EngageLab": "push", "Najva": "push", "Selligent Mobile": "push", "Reteno": "push",
+    "StreetHawk": "push", "Related Digital": "push",
+    "Proxi.cloud": "maps", "ProxSee": "maps", "Pulse iD": "maps",
+    "Popdeem": "social_or_pay",
+    "NasMedia NAP": "ads", "Appier": "ads",
+    "hrt-pk-core": "infra", "LevelDB JNI": "infra", "libxml2": "infra",
     # 批DD（2026-10-20，LCR 2026-10-16 增量 71 实体归类）
     "Agora AOSL": "infra",
     "BMF": "infra",
@@ -376,6 +396,9 @@ NAME_CATEGORY_MAP = {
 }
 
 def categorize(name):
+    ov = NAME_CATEGORY_OVERRIDE.get(name)
+    if ov:
+        return ov
     for pat, cat in CAT_RULES:
         if pat.search(name):
             return cat
@@ -454,7 +477,7 @@ def build(lcr, blocker_json, of2pks_txt, freeze_at, generator):
             label = meta.get("label") or cls.rsplit(".", 1)[0]
             team = meta.get("dev_team", "")
             key = put(f"lcr:{label}", label, team, categorize(label), [],
-                      False, "", ["LibChecker-Rules v44(Apache-2.0)"], "high",
+                      False, "", ["LibChecker-Rules(Apache-2.0)"], "high",
                       meta.get("rule_contributors", []))
             comps[key].append({"type": ctype, "class": cls})
             comp_count += 1
@@ -466,7 +489,7 @@ def build(lcr, blocker_json, of2pks_txt, freeze_at, generator):
         label = meta.get("label") or so_name
         key = put(f"lcrso:{label}", label, meta.get("dev_team", ""),
                   categorize(label), [],
-                  False, "", ["LibChecker-Rules v44(Apache-2.0)"], "high",
+                  False, "", ["LibChecker-Rules(Apache-2.0)"], "high",
                   meta.get("rule_contributors", []))
         comps[key].append({"type": "native", "class": so_name})
         so_count += 1
@@ -726,6 +749,23 @@ def build(lcr, blocker_json, of2pks_txt, freeze_at, generator):
         r = next((x for x in sdks.values() if x["name"] == rname), None)
         if r is not None:
             r["packPrefixes"] = sorted(set(r["packPrefixes"]) | {e + "." for e in extra})
+
+    # v16（2026-11-28）：前缀剔除——上游 blocker 给 Pangolin 补的 com.byted.live. 包住 Douyin Live Lite 的
+    # com.byted.live.lite（LibChecker-Rules 在 com.byted.live 下只有 lite 子包的两个组件，已由 G2③ 归到
+    # Douyin Live Lite）。应用的前缀匹配是“命中即全算”，两条并存会让同一批组件同时算到两个 SDK 名下——
+    # 剔除宽的那条，保留专指的一条。判定书 docs/alias_decisions.md K 节
+    PREFIX_REMOVALS = {
+        "Pangolin Advertising SDK": ["com.byted.live."],
+        # com.volcengine.onekit 是火山引擎多个 SDK 共用的基础库，已有独立实体 Volcengine OneKit
+        "DataFinder analysis": ["com.volcengine.onekit."],
+    }
+    for rname, drop in PREFIX_REMOVALS.items():
+        r = next((x for x in sdks.values() if x["name"] == rname), None)
+        if r is not None:
+            _before = len(r["packPrefixes"])
+            r["packPrefixes"] = [p for p in r["packPrefixes"] if p not in drop]
+            if len(r["packPrefixes"]) != _before:
+                print(f"v16: removed {_before - len(r['packPrefixes'])} prefix(es) from {rname}")
 
     # 批K K2：组件终排序——glob 序已排序，此处再按 (type, class) 稳定终序，跨平台字节一致
     for key in comps:
