@@ -6,7 +6,7 @@
 
 [订阅规则](#-订阅使用) · [核对数据来源](#-数据来源与协议) · [提交规则](CONTRIBUTING.md)
 
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE) [![Rules](https://img.shields.io/badge/Rules-2079-green.svg)](#-数据来源与协议) [![CI](https://img.shields.io/github/actions/workflow/status/deserthouse/Prunoid-Rules/ci.yml?style=flat-square)](https://github.com/deserthouse/Prunoid-Rules/actions)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE) [![Rules](https://img.shields.io/badge/Rules-2121-green.svg)](#-数据来源与协议) [![CI](https://img.shields.io/github/actions/workflow/status/deserthouse/Prunoid-Rules/ci.yml?style=flat-square)](https://github.com/deserthouse/Prunoid-Rules/actions)
 
 </div>
 
@@ -22,10 +22,10 @@ Prunoid 可以同时使用内置快照和多个订阅源。同一 `id` 出现在
 https://raw.githubusercontent.com/deserthouse/Prunoid-Rules/main/rules/snapshot.json
 ```
 
-**固定版本（v15 tag，当前最新）**　需要复核同一批规则时使用这个地址。
+**固定版本（v16 tag，当前最新）**　需要复核同一批规则时使用这个地址。
 
 ```text
-https://raw.githubusercontent.com/deserthouse/Prunoid-Rules/v15/rules/snapshot.json
+https://raw.githubusercontent.com/deserthouse/Prunoid-Rules/v16/rules/snapshot.json
 ```
 
 历史 `vN` 地址继续有效。各版本的规则数见[更新日志](CHANGELOG.md)，自建源可沿用[快照结构](rules/snapshot.json)。
@@ -33,7 +33,7 @@ https://raw.githubusercontent.com/deserthouse/Prunoid-Rules/v15/rules/snapshot.j
 <details>
 <summary>快照如何生成与复核</summary>
 
-`aliases` 将跨语言的 SDK 别名映射到规范名。`scripts/name_descriptions.json` 收录项目自撰的补充描述，只填补上游没有的空缺。从 v13 起，`scripts/build_snapshot.py` 根据 `scripts/upstream_pins.json` 中的上游修订及 `--freeze-at` 时间戳生成快照。发布 tag 时，Linux CI 执行 `rebuild-check`，以 MD5 核对重建产物。v1 至 v12 保留历史产物。上游有仅大小写不同的文件名，Windows 本地构建可能少计 native 锚点。
+`aliases` 将跨语言的 SDK 别名映射到规范名。`scripts/name_descriptions.json` 收录项目自撰的补充描述，只填补上游没有的空缺。从 v13 起，`scripts/build_snapshot.py` 根据 `scripts/upstream_pins.json` 中的上游修订及 `--freeze-at` 时间戳生成快照。发布 tag 时，Linux CI 执行 `rebuild-check`，以 MD5 核对重建产物。v1 至 v12 保留历史产物。v15 及以前的固定点受上游大小写碰撞文件影响，Windows 本地构建会少计 1 条 native 锚点；v16 起上游已消除该碰撞，构建脚本的 glob 排序把路径分隔符归一（此前 Windows 与 Linux 对 …/media/ 与 …/media3/ 这类相邻目录的先后相反）。v16 固定点下已核对 Windows 本地构建与 Linux CI 产物逐字节一致；发布产物仍一律取 Linux CI 构建结果。
 
 </details>
 
@@ -41,7 +41,7 @@ https://raw.githubusercontent.com/deserthouse/Prunoid-Rules/v15/rules/snapshot.j
 
 面向 [Prunoid](https://github.com/deserthouse/Prunoid)（Android SDK 组件审计工具）的开放规则库：识别第三方 app 内嵌的广告 / 统计 / 推送 / 基础设施 SDK，并给出组件级的安全处置建议。
 
-- **2,079 条** SDK 规则，每条携带 `sources[]`（数据出处）与 `confidence`（置信度），合并脚本可复现（数量随快照更新，CI 门禁保证本页与快照一致）
+- **2,121 条** SDK 规则，每条携带 `sources[]`（数据出处）与 `confidence`（置信度），合并脚本可复现（数量随快照更新，CI 门禁保证本页与快照一致）
 - **三路识别**：包名前缀 + 组件类名精确锚点 + 组件类名前缀（端侧确定性匹配，不猜测）
 - **处置标注**：`safeToBlock` / `sideEffect` 逐条给出，不预测、不夸大
 - **可选富字段**：`description` / `devTeam` / `sourceLink` / `iconUrl`（品牌图标 URL，贡献者以自有许可提供）——欢迎在 PR 中补全，App 端档案卡会直接呈现并署名 `contributors`
@@ -57,8 +57,8 @@ https://raw.githubusercontent.com/deserthouse/Prunoid-Rules/v15/rules/snapshot.j
 
 | 来源 | 协议 | 用法 |
 |---|---|---|
-| [LibChecker-Rules](https://github.com/LibChecker/LibChecker-Rules) | Apache-2.0 | 组件识别锚点（1,199 组件 + 1,548 native） |
-| [blocker-general-rules](https://github.com/lihenggui/blocker-general-rules) | Apache-2.0 | SDK 禁用规则（473 条，含 safeToBlock/sideEffect） |
+| [LibChecker-Rules](https://github.com/LibChecker/LibChecker-Rules) | Apache-2.0 | 组件识别锚点（1,201 组件 + 1,550 native） |
+| [blocker-general-rules](https://github.com/lihenggui/blocker-general-rules) | Apache-2.0 | SDK 禁用规则（512 条，含 safeToBlock/sideEffect）。该仓库自 2026-10 起是由 [blocker-catalog](https://github.com/lihenggui/blocker-catalog) 生成的发布端点，本库仍从这里取用六个字段 |
 | oF2pks / 3xodusprivacy-toolbox | 无声明（仅事实字段） | 包名前缀补充（619 条，低置信度标注） |
 | Fuck.AD dex 提取 | 客观事实 | 聚合广告 SDK 根包名（16 家） |
 | 实机 APK 分析 | 一手数据 | 置信度最高 |

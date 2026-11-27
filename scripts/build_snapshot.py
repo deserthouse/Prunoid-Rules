@@ -22,10 +22,14 @@ PREFIX_REMOVALS 剔除与既有实体重叠的宽前缀（穿山甲 com.byted.li
 LCR 来源标签去掉过时的“v44”（固定点早已不是 v44，版本以 upstream_pins.json 为准）。
 
 确定性（批K K2）：--freeze-at 固定 generatedAt；全部 glob 排序+组件终排序——同输入
-同字节，跨平台可复现（v13 起成立；v12 及以前的历史产物含未排序 glob 的平台序，不做回溯）。
-构建环境约束（2026-10-22 实证）：官方构建环境=Linux（CI）。上游 LibChecker-Rules 存在
+同字节（v13 起成立；v12 及以前的历史产物含未排序 glob 的平台序，不做回溯）。跨平台同字节
+自 v16 起成立：v13~v15 的 glob 按原生路径串排序，Windows 与 Linux 对 .../media/... 与
+.../media3/... 的先后相反（2026-11-28 实证：v16 固定点下 Windows 本地与 Linux CI 产物有两条
+相邻实体互换，内容逐字段一致），v16 起排序键归一为 /。
+构建环境约束（2026-10-22 实证）：官方构建环境=Linux（CI）。上游 LibChecker-Rules 曾存在
 大小写碰撞文件（native-libs/libMuPDF.so.json 与 libmupdf.so.json 并存），Windows 大小写
-不敏感文件系统检出只剩其一——Windows 本地构建会少 1 条 native 锚点，不得作为发布来源。
+不敏感文件系统检出只剩其一——受影响的固定点（v15 及以前）在 Windows 本地构建会少 1 条
+native 锚点（上游 7815d0c 起已消除）。Windows 本地构建只作逻辑核对，不得作为发布来源。
 """
 import argparse
 import glob
@@ -410,8 +414,11 @@ def jload(p):
         return json.load(f)
 
 def sglob(pattern, recursive=False):
-    """确定性 glob（批K K2）：路径排序——跨平台字节可复现的前提（原生 glob 顺序为 OS 序）。"""
-    return sorted(glob.glob(pattern, recursive=recursive))
+    """确定性 glob（批K K2）：路径排序——跨平台字节可复现的前提（原生 glob 顺序为 OS 序）。
+    v16：排序键把路径分隔符归一为 /。按原生路径串排序时，Windows 的反斜杠（0x5C）与 Linux 的
+    斜杠（0x2F）会让 .../media/... 与 .../media3/... 这类相邻目录的先后相反（上游 receivers-libs
+    的 androidx.media 与 androidx.media3），实体首现顺序随之不同。"""
+    return sorted(glob.glob(pattern, recursive=recursive), key=lambda p: p.replace("\\", "/"))
 
 sdks = {}   # merge_key -> rule dict
 comps = {}  # merge_key -> list of {type, class}

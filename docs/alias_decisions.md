@@ -149,3 +149,19 @@ Adjust SDK→Adjust · Ali TBAuth→Ali Account SDK · 金融级实人认证 SDK
 | Octopus Ad → Octopus Ads | A | 前缀 com.octopus.ad 同域；规范名取高置信一方（blocker high），低置信样本审计条目并入 |
 
 **保持独立**：Rongyun push（io.rong.push，推送通道）↔ 融云 IM SDK（IM 能力，"同公司不同产品"先例）；WeChat advertisement / WeChat Location / WeChat NFC（微信本体域，H 节判定不变）。
+
+
+## K. v16 上游同步批的前缀裁决与别名（2026-11-28，tag v16）
+
+> 上游 blocker-general-rules 55ae4b9→312d42b 给 12 条既有规则补了 16 个包名前缀、新增 39 条规则。入库前做了包含关系扫描（新前缀 ↔ 全库前缀，按别名分组后比较）：跨实体的包含关系共两组，都不新增实体级合并，只在数据侧剔除宽的那条——应用的前缀匹配是“命中即全算”、去重只并同名，两条并存时同一批组件会同时计入两个 SDK。
+
+| 宽前缀（剔除） | 原归属 → 处理 | 保留的专指前缀 | 证据 |
+|---|---|---|---|
+| com.byted.live. | Pangolin Advertising SDK → 剔除 | com.byted.live.lite（抖音直播 Lite） | LibChecker-Rules 在 com.byted.live 下只有 lite 子包的两个 ServerManager provider（上游标签 Pangle SDK，批GG G2③ 已归位到 Douyin Live Lite）；上游没有 com.byted.live.* 的其他规则 |
+| com.volcengine.onekit. | DataFinder analysis → 剔除 | com.apm.applog.（DataFinder analysis）；com.volcengine.onekit（Volcengine OneKit，独立实体） | OneKit 是火山引擎多个 SDK 共用的基础库，库内已有独立实体（样本审计 2026-09） |
+
+| 别名 → 规范名 | 级别 | 证据 |
+|---|---|---|
+| BIGO Ads → Bigo Ads | A | 同一 SDK 的大小写变体：blocker 新增规则 sg.bigo.ads.，样本审计条目 sg.bigo.ads；全库扫描仅此一对 |
+
+**保持独立**：Pulsate（blocker 新增，前缀 com.pulsatehq. 与 oF2pks 条目相同）、TradPlus（blocker 新增 com.tradplus.；Fuck.AD 条目持 com.tradplus.ads）——与既有实体同名，运行时由同名归并处理，不需要别名。Pangle 组内的 com.bytedance / com.bytedance.msdk. 同属一个别名组，不构成跨实体重叠。

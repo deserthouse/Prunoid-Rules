@@ -10,8 +10,8 @@ Copyright 2026 Prunoid contributors
 
 2. blocker-general-rules (https://github.com/lihenggui/blocker-general-rules)
    License: Apache-2.0
-   用法：SDK 级禁用规则 468 条（含 safeToBlock/sideEffect/contributors，
-   en+zh-CN）。
+   用法：SDK 级禁用规则 512 条（含 safeToBlock/sideEffect/contributors，
+   en+zh-CN）。该仓库的规则文件由 blocker-catalog（Apache-2.0）生成。
 
 上述数据依 Apache-2.0 授权继承，本仓库整体亦以 Apache-2.0 分发。
 各条规则的 data 出处见快照内 `sources` 字段；社区贡献者见 `contributors` 字段。
