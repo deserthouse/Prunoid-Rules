@@ -58,7 +58,7 @@ https://raw.githubusercontent.com/deserthouse/Prunoid-Rules/v16/rules/snapshot.j
 | 来源 | 协议 | 用法 |
 |---|---|---|
 | [LibChecker-Rules](https://github.com/LibChecker/LibChecker-Rules) | Apache-2.0 | 组件识别锚点（1,201 组件 + 1,550 native） |
-| [blocker-general-rules](https://github.com/lihenggui/blocker-general-rules) | Apache-2.0 | SDK 禁用规则（512 条，含 safeToBlock/sideEffect）。该仓库自 2026-10 起是由 [blocker-catalog](https://github.com/lihenggui/blocker-catalog) 生成的发布端点，本库仍从这里取用六个字段 |
+| [blocker-general-rules](https://github.com/lihenggui/blocker-general-rules) | Apache-2.0 | SDK 禁用规则（512 条，含 safeToBlock/sideEffect）。该仓库自 2026-11-25 起在 README 中自称 “Blocker legacy rules”：为克隆它的 Blocker 版本提供规则文件，文件由 [blocker-catalog](https://github.com/lihenggui/blocker-catalog)（Apache-2.0）生成；本库仍从这里取用六个字段 |
 | oF2pks / 3xodusprivacy-toolbox | 无声明（仅事实字段） | 包名前缀补充（619 条，低置信度标注） |
 | Fuck.AD dex 提取 | 客观事实 | 聚合广告 SDK 根包名（16 家） |
 | 实机 APK 分析 | 一手数据 | 置信度最高 |

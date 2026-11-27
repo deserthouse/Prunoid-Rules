@@ -57,3 +57,13 @@ PR 会自动运行 `scripts/validate_rules.py`：
 
 收录四步：事实提取（manifest 组件）→ 研判（附公开依据）→ schema 化（source 标注+confidence）→ CI 门禁。
 安全等级只升不造；研判不确定项宁缺毋滥。
+
+## 上游来源链与许可判定（2026-11-28 复核）
+
+逐源以下游仓库自己的 LICENSE 文件为准（复核时两个上游的 LICENSE 均为 Apache-2.0，自上一固定点以来未变）：
+
+- **LibChecker-Rules**（`v4` 分支）：取四类组件目录（activities / services / receivers / providers-libs）里的组件类名，以及 `native-libs/` 顶层的 native 库名，作为识别锚点；`native-libs/regex/` 子目录不取。
+- **blocker-general-rules**：取 `rules/en/general.json` 每条规则的六个字段——`name`、`company`、`searchKeyword`（包名前缀）、`safeToBlock`、`sideEffect`、`contributors`。该仓库自 2026-11-25（提交 `312d42b` “Publish catalog 1”）起在 README 中自称 “Blocker legacy rules”：为克隆它的 Blocker 版本提供规则文件，文件由 [blocker-catalog](https://github.com/lihenggui/blocker-catalog)（Apache-2.0）生成；此前（`55ae4b9`、`c60f3db84`）由该仓库的 `src/` 经 CI 生成。消费的端点、字段与许可不变；其余字段（`id`、`description`、`iconUrl`、`useRegexSearch`）不入快照。
+- **Exodus 数据库是 ODbL v1.0**：同源义务，不并入本库。上游规则自带的标注不随六个字段进入快照。
+
+上游修订固定在 `scripts/upstream_pins.json`；发布 tag 时 CI 按固定点重建并逐字节核对。
